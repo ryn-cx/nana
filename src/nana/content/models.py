@@ -2,7 +2,7 @@ from datetime import date, time
 from typing import Any
 from uuid import UUID
 from good_ass_pydantic_integrator import GAPIBaseModel
-from pydantic import AwareDatetime, ConfigDict, Field
+from pydantic import AwareDatetime, ConfigDict, Field, NaiveDatetime
 
 class Meta(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -57,7 +57,7 @@ class Field100(GAPIBaseModel):
 
 class Descriptions(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    field_100: Field100 = Field(..., alias='100')
+    field_100: Field100 | None = Field(None, alias='100')
 
 class Image(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -145,8 +145,8 @@ class Media(GAPIBaseModel):
     duration: int
     ad_breaks: list[time] = Field(..., alias='adBreaks')
     original_audio_language: str | None = Field(None, alias='originalAudioLanguage')
-    validity_end_time: AwareDatetime = Field(..., alias='validityEndTime')
-    validity_start_time: AwareDatetime = Field(..., alias='validityStartTime')
+    validity_end_time: AwareDatetime | NaiveDatetime = Field(..., alias='validityEndTime')
+    validity_start_time: AwareDatetime | NaiveDatetime = Field(..., alias='validityStartTime')
     videos: list[Video]
     trick_play_files: list[TrickPlayFile] = Field(..., alias='trickPlayFiles')
     captions: list[Caption]
@@ -358,8 +358,8 @@ class Media1(GAPIBaseModel):
     audio_tracks: list[AudioTrack1] = Field(..., alias='audioTracks')
     duration: int
     ad_breaks: list[time] = Field(..., alias='adBreaks')
-    validity_end_time: AwareDatetime = Field(..., alias='validityEndTime')
-    validity_start_time: AwareDatetime = Field(..., alias='validityStartTime')
+    validity_end_time: NaiveDatetime = Field(..., alias='validityEndTime')
+    validity_start_time: NaiveDatetime = Field(..., alias='validityStartTime')
     videos: list[Video1]
     trick_play_files: list[TrickPlayFile] = Field(..., alias='trickPlayFiles')
     captions: list[Caption]
@@ -402,7 +402,7 @@ class ViewOption1(GAPIBaseModel):
     playback_details: PlaybackDetails = Field(..., alias='playbackDetails')
     price: int
     provider_id: str = Field(..., alias='providerId')
-    validity_end_time: AwareDatetime = Field(..., alias='validityEndTime')
+    validity_end_time: NaiveDatetime = Field(..., alias='validityEndTime')
     provider_details: ProviderDetails1 = Field(..., alias='providerDetails')
     currency: str
     provider_name: str = Field(..., alias='providerName')
@@ -413,7 +413,7 @@ class ViewOption1(GAPIBaseModel):
     tags: list[str]
     in_hd: bool = Field(..., alias='inHd')
     license: str
-    validity_start_time: AwareDatetime = Field(..., alias='validityStartTime')
+    validity_start_time: NaiveDatetime = Field(..., alias='validityStartTime')
     is_dummy_play_id: bool = Field(..., alias='isDummyPlayId')
     credit_cue_points: list[CreditCuePoint] = Field(..., alias='creditCuePoints')
 
