@@ -1,14 +1,15 @@
+# TODO: Validate
 """Contains the Search class."""
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+import json
 from logging import NullHandler, getLogger
-from typing import TYPE_CHECKING, Any, override
+from typing import TYPE_CHECKING
 
 from nana.base_api_endpoint import BaseEndpoint
 from nana.exceptions import EmptySearchResultsError
-from nana.search.models import SearchModel
+from nana.search.models import SearchModel, model_validate_json
 
 if TYPE_CHECKING:
     from nana.search.models import Content
@@ -17,7 +18,8 @@ logger = getLogger(__name__)
 logger.addHandler(NullHandler())
 
 
-class Search(BaseEndpoint[SearchModel]):
+# TODO: Validate
+class Search(BaseEndpoint):
     """Manage the search file.
 
     Search is the only endpoint that is not a GET, so it is the only one that
@@ -51,10 +53,15 @@ class Search(BaseEndpoint[SearchModel]):
         {"query": "{query}"}
     """
 
-    _response_model = SearchModel
+    # TODO: Validate
+    def __call__(self, query: str) -> SearchModel:
+        """Run the search and return the model it is read into."""
+        log_id = self.get_log_id(self.__call__, locals())
+        return self.load(self.download(query), log_id)
 
-    @override
-    def download(self, query: str) -> dict[str, Any]:
+    # TODO: Validate
+    def download(self, query: str) -> str:
+        """Download the search file."""
         log_id = self.get_log_id(self.download, locals())
         response = self._client.post(
             endpoint="api/v1/search",
@@ -64,33 +71,20 @@ class Search(BaseEndpoint[SearchModel]):
         )
         return self._validate_download(response, query)
 
-    def _validate_download(
-        self,
-        response: dict[str, Any],
-        query: str,
-    ) -> dict[str, Any]:
+    # TODO: Validate
+    def _validate_download(self, response: str, query: str) -> str:
         # A query that matches nothing is answered with a 200 and an empty view.
-        if not response.get("view"):
+        if not json.loads(response).get("view"):
             raise EmptySearchResultsError(query, response)
         return response
 
-    @override
-    def download_and_parse(self, query: str) -> SearchModel:
-        return self.parse(self.download(query))
+    # TODO: Validate
+    def load(self, data: str, log_id: str = "") -> SearchModel:
+        """Read a downloaded search file into its model."""
+        return model_validate_json(data, log_id or type(self).__name__)
 
-    def extract_content(
-        self,
-        input_data: SearchModel
-        | dict[str, Any]
-        | Sequence[SearchModel | dict[str, Any]],
-    ) -> list[Content]:
-        """Extracts the matched content from one or more files."""
-        responses = input_data if isinstance(input_data, Sequence) else [input_data]
-
-        result: list[Content] = []
-        for response in responses:
-            parsed = (
-                response if isinstance(response, SearchModel) else self.parse(response)
-            )
-            result.extend(item.content for item in parsed.view)
-        return result
+    # TODO: Validate
+    @classmethod
+    def extract_content(cls, data: SearchModel) -> list[Content]:
+        """Extract the titles a search matched."""
+        return [item.content for item in data.view]

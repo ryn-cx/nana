@@ -1,10 +1,10 @@
 # TODO: Validate
 """Query parameters the detail screen asks for."""
 
-CONTENT_URL = "https://content.sr.roku.com/content/v1/roku-trc/"
-"""Prefix of the content URL that the homescreen endpoint proxies to."""
+SEPARATOR = ","
+"""What the API separates the values of a list parameter with."""
 
-EXPAND = ",".join(
+EXPAND = SEPARATOR.join(
     (
         "next",
         "credits",
@@ -25,7 +25,7 @@ EXPAND = ",".join(
 )
 """Relations to inline into the response instead of returning a reference."""
 
-INCLUDE = ",".join(
+INCLUDE = SEPARATOR.join(
     (
         "type",
         "title",
@@ -131,7 +131,7 @@ INCLUDE = ",".join(
 """Fields to return. Without it the response carries every known field and is
 several times larger."""
 
-FILTER = ",".join(
+FILTER = SEPARATOR.join(
     (
         "categoryObjects:genreAppropriate%20eq%20true",
         "seasons.episodes:(not%20empty(viewOptions)):all",
@@ -142,5 +142,5 @@ FILTER = ",".join(
 The spaces are pre-encoded because the API expects them escaped inside the
 already escaped value."""
 
-FEATURE_INCLUDE = ",".join(("bookmark", "watchlist", "linearSchedule"))
+FEATURE_INCLUDE = SEPARATOR.join(("bookmark", "watchlist", "linearSchedule"))
 """Per-account features to annotate the response with."""

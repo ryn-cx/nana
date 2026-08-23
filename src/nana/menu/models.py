@@ -1,62 +1,54 @@
-from uuid import UUID
-from good_ass_pydantic_integrator import GAPIBaseModel
-from pydantic import ConfigDict, Field
+"""MenuModel, strict to a type checker, all-optional at runtime.
 
-class Meta(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    id: str
-    type: str
-    path: str | None = None
+A type checker reads the strict model, so every field carries the type and
+the requiredness the schema recorded. At runtime the all-optional copy is imported
+instead, so a response that has drifted still parses and a field the data is
+missing is None despite what its type hint says.
+"""
 
-class Meta1(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    id: str
-    type: str
+from typing import TYPE_CHECKING
 
-class ViewItem2(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    meta: Meta1
-    icon: str | None = None
-    title: str
+from good_ass_pydantic_integrator import load
 
-class ViewItem1(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    view: list[ViewItem2]
-    meta: Meta1
-    title: str
+from .optional_models import MenuModel as OptionalModel
+from .strict_models import MenuModel as StrictModel
 
-class ViewItem(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    meta: Meta
-    hideable: bool
-    title_loc_key: str = Field(..., alias='titleLocKey')
-    do_not_personalize: bool = Field(..., alias='doNotPersonalize')
-    field_uuid: str = Field(..., alias='_UUID')
-    custom_icon_text: str = Field(..., alias='customIconText')
-    id: str
-    title: str
-    view: list[ViewItem1] | None = None
+if TYPE_CHECKING:
+    from .strict_models import (
+        MenuModel,
+        Meta,
+        Meta1,
+        Meta3,
+        TrackerOverrides,
+        ViewItem,
+        ViewItem1,
+        ViewItem2,
+    )
+else:
+    from .optional_models import (
+        MenuModel,
+        Meta,
+        Meta1,
+        Meta3,
+        TrackerOverrides,
+        ViewItem,
+        ViewItem1,
+        ViewItem2,
+    )
 
-class Meta3(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    version: int
-    media_type: str = Field(..., alias='mediaType')
-    id: str
+__all__ = [
+    "MenuModel",
+    "Meta",
+    "Meta1",
+    "Meta3",
+    "TrackerOverrides",
+    "ViewItem",
+    "ViewItem1",
+    "ViewItem2",
+    "model_validate_json",
+]
 
-class TrackerOverrides(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    item_server_data: str
 
-class MenuModel(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    id: str
-    type: str
-    view: list[ViewItem]
-    meta: Meta3
-    deletable: bool
-    channel_store: str = Field(..., alias='channelStore')
-    iln_enabled: bool = Field(..., alias='ilnEnabled')
-    active_index: int = Field(..., alias='activeIndex')
-    collapse: bool
-    tracker_overrides: TrackerOverrides = Field(..., alias='trackerOverrides')
-    trace_id: UUID = Field(..., alias='traceId')
+def model_validate_json(data: str | bytes | object, log_id: str) -> MenuModel:
+    """Read a downloaded file into MenuModel."""
+    return load.model_validate_json(StrictModel, OptionalModel, data, log_id)

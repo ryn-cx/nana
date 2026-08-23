@@ -6,15 +6,18 @@ from __future__ import annotations
 from typing import Any
 
 
+# TODO: Validate
 class NanaError(Exception):
     """Base exception for Nana."""
 
     response: str | dict[str, Any] | None = None
 
 
+# TODO: Validate
 class HTTPError(NanaError):
     """Raised when HTTP request fails with unexpected status code."""
 
+    # TODO: Validate
     def __init__(
         self,
         status_code: int,
@@ -26,13 +29,16 @@ class HTTPError(NanaError):
         super().__init__(f"Unexpected response status code: {status_code}")
 
 
+# TODO: Validate
 class ResourceNotFoundError(HTTPError):
     """Raised when the API reports that the requested resource does not exist."""
 
 
+# TODO: Validate
 class ContentNotFoundError(ResourceNotFoundError):
     """Raised when the requested content does not exist."""
 
+    # TODO: Validate
     def __init__(
         self,
         content_id: str,
@@ -44,6 +50,7 @@ class ContentNotFoundError(ResourceNotFoundError):
         super().__init__(status_code, response)
 
 
+# TODO: Validate
 class PageNotFoundError(ResourceNotFoundError):
     """Raised when the requested page does not exist.
 
@@ -51,6 +58,7 @@ class PageNotFoundError(ResourceNotFoundError):
     and 500 responses from the pages endpoint.
     """
 
+    # TODO: Validate
     def __init__(
         self,
         page_id: str,
@@ -62,19 +70,27 @@ class PageNotFoundError(ResourceNotFoundError):
         super().__init__(status_code, response)
 
 
+# TODO: Validate
 class CSRFTokenError(NanaError):
     """Raised when a CSRF token and its matching cookie could not be collected."""
 
+    # TODO: Validate
     def __init__(self, url: str) -> None:
         """Initialize with the url that was expected to hand out a token."""
         self.url = url
         super().__init__(f"No CSRF token found in the response from {url}")
 
 
+# TODO: Validate
 class EmptySearchResultsError(NanaError, ValueError):
-    """Raised when a search returns no results."""
+    """Raised when a search matches nothing."""
 
-    def __init__(self, query: str, response: dict[str, Any]) -> None:
+    # TODO: Validate
+    def __init__(
+        self,
+        query: str,
+        response: str | dict[str, Any] | None,
+    ) -> None:
         """Initialize with the query and the original response."""
         self.query = query
         self.response = response

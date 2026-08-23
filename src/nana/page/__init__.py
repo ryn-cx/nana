@@ -1,15 +1,15 @@
+# TODO: Validate
 """Contains the Page class."""
 
 from __future__ import annotations
 
-from collections.abc import Sequence
 from logging import NullHandler, getLogger
-from typing import TYPE_CHECKING, Any, override
+from typing import TYPE_CHECKING
 from urllib.parse import quote
 
 from nana.base_api_endpoint import BaseEndpoint
 from nana.exceptions import HTTPError, PageNotFoundError
-from nana.page.models import PageModel
+from nana.page.models import PageModel, model_validate_json
 
 if TYPE_CHECKING:
     from nana.page.models import Content
@@ -22,7 +22,8 @@ NOT_FOUND_STATUS_CODES = (404, 500)
 as a server error rather than a 404."""
 
 
-class Page(BaseEndpoint[PageModel]):
+# TODO: Validate
+class Page(BaseEndpoint):
     """Manage the page file.
 
     A page is a browse screen, it holds the collections ("Recently Added",
@@ -53,10 +54,15 @@ class Page(BaseEndpoint[PageModel]):
         - TE: trailers
     """
 
-    _response_model = PageModel
+    # TODO: Validate
+    def __call__(self, page_id: str) -> PageModel:
+        """Look the page up and return the model it is read into."""
+        log_id = self.get_log_id(self.__call__, locals())
+        return self.load(self.download(page_id), log_id)
 
-    @override
-    def download(self, page_id: str) -> dict[str, Any]:
+    # TODO: Validate
+    def download(self, page_id: str) -> str:
+        """Download the page file."""
         log_id = self.get_log_id(self.download, locals())
         endpoint = f"api/v2/homescreen/pages/{quote(page_id, safe='')}/rendered"
         try:
@@ -70,26 +76,19 @@ class Page(BaseEndpoint[PageModel]):
                 ) from err
             raise
 
-    @override
-    def download_and_parse(self, page_id: str) -> PageModel:
-        return self.parse(self.download(page_id))
+    # TODO: Validate
+    def load(self, data: str, log_id: str = "") -> PageModel:
+        """Read a downloaded page file into its model."""
+        return model_validate_json(data, log_id or type(self).__name__)
 
-    def extract_content(
-        self,
-        input_data: PageModel
-        | dict[str, Any]
-        | Sequence[PageModel | dict[str, Any]],
-    ) -> list[Content]:
-        """Extracts the content of every collection from one or more files.
+    # TODO: Validate
+    @classmethod
+    def extract_content(cls, data: PageModel) -> list[Content]:
+        """Extract the content of every collection on a page.
 
-        A title that appears in more than one collection is returned more than
-        once, the collections it came from are not deduplicated.
+        A title that appears in more than one collection is returned once per
+        collection it appears in.
         """
-        responses = input_data if isinstance(input_data, Sequence) else [input_data]
-
-        result: list[Content] = []
-        for response in responses:
-            parsed = response if isinstance(response, PageModel) else self.parse(response)
-            for collection in parsed.collections:
-                result.extend(item.content for item in collection.view)
-        return result
+        return [
+            item.content for collection in data.collections for item in collection.view
+        ]

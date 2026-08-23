@@ -5,30 +5,44 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from tests.utils import download_and_save, parsed_json
+from nana.menu import Menu
+from nana.menu.models import MenuModel
+from tests.utils import RecordedEndpoint
 
 if TYPE_CHECKING:
     from nana import Nana
-    from nana.menu import Menu
 
-NAME = "menu"
-
-
-@pytest.fixture(scope="session")
-def client(client: Nana) -> Menu:
-    return client.menu
+MENU_NAMES = [
+    pytest.param("menu", id="the us storefront menu"),
+]
 
 
-def test_download(client: Menu) -> None:
-    download_and_save(client, NAME, client.download)
+# TODO: Validate
+class MenuTest(RecordedEndpoint):
+    MODEL = MenuModel
+    IGNORED = (
+        "MenuModel.trace_id",
+        "TrackerOverrides.item_server_data",
+        "ViewItem.field_uuid",
+    )
 
 
-def test_parse(client: Menu) -> None:
-    data = parsed_json(client, NAME)
-    assert data.view
+# TODO: Validate
+@pytest.mark.parametrize("name", MENU_NAMES)
+def test_download(client: Nana, name: str) -> None:
+    MenuTest.download_test(name, client.menu.download)
 
 
-def test_extract_pages(client: Menu) -> None:
-    pages = client.extract_pages(parsed_json(client, NAME))
+# TODO: Validate
+@pytest.mark.parametrize("name", MENU_NAMES)
+def test_parse(client: Nana, name: str) -> None:
+    menu = client.menu.load(MenuTest.recorded_content(name))
+    assert menu.meta.id == "trc_web_us"
+
+
+# TODO: Validate
+@pytest.mark.parametrize("name", MENU_NAMES)
+def test_extract_pages(client: Nana, name: str) -> None:
+    pages = Menu.extract_pages(client.menu.load(MenuTest.recorded_content(name)))
     assert pages
-    assert all(page.meta.id for page in pages)
+    assert all(entry.meta.type == "page" for entry in pages)

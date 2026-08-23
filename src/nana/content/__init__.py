@@ -4,25 +4,19 @@
 from __future__ import annotations
 
 from logging import NullHandler, getLogger
-from typing import Any, override
 from urllib.parse import quote, urlencode
 
 from nana.base_api_endpoint import BaseEndpoint
-from nana.content.constants import (
-    CONTENT_URL,
-    EXPAND,
-    FEATURE_INCLUDE,
-    FILTER,
-    INCLUDE,
-)
-from nana.content.models import ContentModel
+from nana.content.constants import EXPAND, FEATURE_INCLUDE, FILTER, INCLUDE
+from nana.content.models import ContentModel, model_validate_json
 from nana.exceptions import ContentNotFoundError, ResourceNotFoundError
 
 logger = getLogger(__name__)
 logger.addHandler(NullHandler())
 
 
-class Content(BaseEndpoint[ContentModel]):
+# TODO: Validate
+class Content(BaseEndpoint):
     """Manage the content file.
 
     One endpoint covers every kind of content, the `type` field says which one
@@ -58,8 +52,7 @@ class Content(BaseEndpoint[ContentModel]):
         - TE: trailers
     """
 
-    _response_model = ContentModel
-
+    # TODO: Validate
     @staticmethod
     def endpoint(
         content_id: str,
@@ -82,12 +75,36 @@ class Content(BaseEndpoint[ContentModel]):
                 "featureInclude": feature_include,
             },
         )
+        content_url = f"https://content.sr.roku.com/content/v1/roku-trc/{content_id}"
         return "api/v2/homescreen/content/" + quote(
-            f"{CONTENT_URL}{content_id}?{query}",
+            f"{content_url}?{query}",
             safe="",
         )
 
-    @override
+    # TODO: Validate
+    def __call__(
+        self,
+        content_id: str,
+        *,
+        expand: str = EXPAND,
+        include: str = INCLUDE,
+        filters: str = FILTER,
+        feature_include: str = FEATURE_INCLUDE,
+    ) -> ContentModel:
+        """Look the content up and return the model it is read into."""
+        log_id = self.get_log_id(self.__call__, locals())
+        return self.load(
+            self.download(
+                content_id,
+                expand=expand,
+                include=include,
+                filters=filters,
+                feature_include=feature_include,
+            ),
+            log_id,
+        )
+
+    # TODO: Validate
     def download(
         self,
         content_id: str,
@@ -96,8 +113,10 @@ class Content(BaseEndpoint[ContentModel]):
         include: str = INCLUDE,
         filters: str = FILTER,
         feature_include: str = FEATURE_INCLUDE,
-    ) -> dict[str, Any]:
+    ) -> str:
+        """Download the content file."""
         log_id = self.get_log_id(self.download, locals())
+        referer = f"https://therokuchannel.roku.com/details/{content_id}"
         try:
             return self._client.download(
                 endpoint=self.endpoint(
@@ -107,11 +126,7 @@ class Content(BaseEndpoint[ContentModel]):
                     filters=filters,
                     feature_include=feature_include,
                 ),
-                headers={
-                    "referer": (
-                        f"https://therokuchannel.roku.com/details/{content_id}"
-                    ),
-                },
+                headers={"referer": referer},
                 log_id=log_id,
             )
         except ResourceNotFoundError as err:
@@ -121,22 +136,7 @@ class Content(BaseEndpoint[ContentModel]):
                 err.response,
             ) from err
 
-    @override
-    def download_and_parse(
-        self,
-        content_id: str,
-        *,
-        expand: str = EXPAND,
-        include: str = INCLUDE,
-        filters: str = FILTER,
-        feature_include: str = FEATURE_INCLUDE,
-    ) -> ContentModel:
-        return self.parse(
-            self.download(
-                content_id,
-                expand=expand,
-                include=include,
-                filters=filters,
-                feature_include=feature_include,
-            ),
-        )
+    # TODO: Validate
+    def load(self, data: str, log_id: str = "") -> ContentModel:
+        """Read a downloaded content file into its model."""
+        return model_validate_json(data, log_id or type(self).__name__)
