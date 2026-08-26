@@ -91,14 +91,14 @@ class RecordedEndpoint:
     @classmethod
     def recorded_content(cls, name: str | int, category: Category = None) -> str:
         """Return the recorded response for `name` as it was served."""
-        return cls.recorded_path(name, category).read_text()
+        return cls.recorded_path(name, category).read_text(encoding="utf-8")
 
     # TODO: Validate
     @classmethod
     def write_file(cls, path: Path, content: str) -> None:
         """Write `content`, making the folders it goes in if they are missing."""
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content)
+        path.write_text(content, encoding="utf-8")
 
     # TODO: Validate
     @classmethod
@@ -221,7 +221,7 @@ class RecordedEndpoint:
             # written down and stands as what is expected from now on.
             cls.write_file(path, json.dumps(current, indent=2))
             return current
-        return json.loads(path.read_text())
+        return json.loads(path.read_text(encoding="utf-8"))
 
     # TODO: Validate
     @classmethod

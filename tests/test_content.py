@@ -17,6 +17,10 @@ CONTENT_IDS = [
     pytest.param("14de3bf28d7153ff8d938f554b76dcf5", id="die hart series"),
     pytest.param("14de3bf28d7153ff8d938f554b76dcf5-2", id="die hart season 2"),
     pytest.param("2fa0eef93c07552da8c6f81988100b02", id="die hart episode"),
+    pytest.param(
+        "e04fbb4fc17c5dcc8c96023ac42e31df",
+        id="movie whose licensing window carries no timezone",
+    ),
 ]
 
 
@@ -64,6 +68,12 @@ def test_download(client: Nana, content_id: str) -> None:
             "episode",
             "Hart Broken",
             id="die hart episode",
+        ),
+        pytest.param(
+            "e04fbb4fc17c5dcc8c96023ac42e31df",
+            "movie",
+            "Rocky",
+            id="movie whose licensing window carries no timezone",
         ),
     ],
 )

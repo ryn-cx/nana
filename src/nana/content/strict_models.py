@@ -1,9 +1,10 @@
+from datetime import datetime
 from typing import Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
-from datetime import date, time
+from pydantic import AwareDatetime, BaseModel, Field
 from typing import Any
 from uuid import UUID
-from pydantic import AwareDatetime, BaseModel, Field
+from datetime import date, time
 
 class DetailPoster(BaseModel):
     path: str
@@ -102,8 +103,8 @@ class Media(BaseModel):
     videos: list[Video]
     trick_play_files: list[TrickPlayFile] = Field(..., alias='trickPlayFiles')
     captions: list[Caption]
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
+    validity_end_time: datetime = Field(None, alias='validityEndTime')
+    validity_start_time: datetime = Field(None, alias='validityStartTime')
 
 class ViewOption(BaseModel):
     play_id: str = Field(..., alias='playId')
@@ -115,6 +116,7 @@ class ViewOption(BaseModel):
     provider_name: str = Field(..., alias='providerName')
     ads_provider_id: str = Field(..., alias='adsProviderId')
     provider_product_id: str | None = Field(None, alias='providerProductId')
+    ads_content_id: str | None = Field(None, alias='adsContentId')
 
 class Credit(BaseModel):
     role: str
@@ -301,8 +303,8 @@ class BottomLeftItem(BaseModel):
     badge_color: list[str] = Field(..., alias='badgeColor')
     image: Image3
     badge_type: str = Field(..., alias='badgeType')
-    validity_end_time: AwareDatetime = Field(..., alias='validityEndTime')
-    validity_start_time: AwareDatetime = Field(..., alias='validityStartTime')
+    validity_end_time: datetime = Field(..., alias='validityEndTime')
+    validity_start_time: datetime = Field(..., alias='validityStartTime')
     id: UUID
     text: str
     audioguide: str
@@ -315,8 +317,8 @@ class BottomLeftItem1(BaseModel):
     badge_color: list[str] = Field(..., alias='badgeColor')
     image: Image3
     badge_type: str = Field(..., alias='badgeType')
-    validity_end_time: AwareDatetime = Field(..., alias='validityEndTime')
-    validity_start_time: AwareDatetime = Field(..., alias='validityStartTime')
+    validity_end_time: datetime = Field(..., alias='validityEndTime')
+    validity_start_time: datetime = Field(..., alias='validityStartTime')
     id: UUID
     text: str
     audioguide: str

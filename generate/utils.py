@@ -33,4 +33,4 @@ def download_if_missing(
         return
     logger.info("Downloading %s/%s.", model_name, name)
     recorded_path.parent.mkdir(parents=True, exist_ok=True)
-    recorded_path.write_text(download())
+    recorded_path.write_text(download(), encoding="utf-8")

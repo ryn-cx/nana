@@ -1,9 +1,10 @@
+from datetime import datetime
 from typing import Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
-from datetime import date, time
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 from typing import Any
 from uuid import UUID
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+from datetime import date, time
 
 class DetailPoster(BaseModel):
     model_config = ConfigDict(extra='ignore')
@@ -118,8 +119,8 @@ class Media(BaseModel):
     videos: list[Video] | None = None
     trick_play_files: list[TrickPlayFile] | None = Field(None, alias='trickPlayFiles')
     captions: list[Caption] | None = None
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
+    validity_end_time: datetime = Field(None, alias='validityEndTime')
+    validity_start_time: datetime = Field(None, alias='validityStartTime')
 
 class ViewOption(BaseModel):
     model_config = ConfigDict(extra='ignore')
@@ -132,6 +133,7 @@ class ViewOption(BaseModel):
     provider_name: str | None = Field(None, alias='providerName')
     ads_provider_id: str | None = Field(None, alias='adsProviderId')
     provider_product_id: str | None = Field(None, alias='providerProductId')
+    ads_content_id: str | None = Field(None, alias='adsContentId')
 
 class Credit(BaseModel):
     model_config = ConfigDict(extra='ignore')
@@ -343,8 +345,8 @@ class BottomLeftItem(BaseModel):
     badge_color: list[str] | None = Field(None, alias='badgeColor')
     image: Image3 | None = None
     badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
+    validity_end_time: datetime = Field(None, alias='validityEndTime')
+    validity_start_time: datetime = Field(None, alias='validityStartTime')
     id: UUID | None = None
     text: str | None = None
     audioguide: str | None = None
@@ -359,8 +361,8 @@ class BottomLeftItem1(BaseModel):
     badge_color: list[str] | None = Field(None, alias='badgeColor')
     image: Image3 | None = None
     badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
+    validity_end_time: datetime = Field(None, alias='validityEndTime')
+    validity_start_time: datetime = Field(None, alias='validityStartTime')
     id: UUID | None = None
     text: str | None = None
     audioguide: str | None = None
