@@ -1,7 +1,7 @@
 from typing import Any, Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
-from pydantic import BaseModel, ConfigDict, Field
 from uuid import UUID
+from pydantic import BaseModel, ConfigDict, Field
 
 class Meta(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)

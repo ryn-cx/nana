@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+from datetime import date, time
 from typing import Any
 from uuid import UUID
-from datetime import date, time
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 class DetailPoster(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)

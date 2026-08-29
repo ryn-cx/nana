@@ -6,15 +6,12 @@ from __future__ import annotations
 import logging
 
 from get_around import build_client_automatically
-from good_ass_pydantic_integrator import generate_model
 
 from generate.constants import FILES_PATH, NANA_PATH
-from generate.utils import download_if_missing
+from generate.utils import download_if_missing, load_ids, rebuild_model
 from nana import Nana
 
-PAGE_IDS = [
-    "w.K1mlzamaPvhLKYkBrNw5f9zoDy7WkWFk601b6NR7U2WrBwNgpPIqB4LoJY26T9jaW15eM",
-]
+PAGE_IDS = load_ids("PageModel")
 """The TV shows browse page."""
 
 
@@ -28,7 +25,7 @@ def generate_page(client: Nana) -> None:
             page_id,
             lambda page_id=page_id: client.page.download(page_id),
         )
-    generate_model(FILES_PATH, NANA_PATH, "PageModel")
+    rebuild_model(FILES_PATH, NANA_PATH, "PageModel")
 
 
 if __name__ == "__main__":

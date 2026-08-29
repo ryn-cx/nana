@@ -9,16 +9,10 @@ from get_around import build_client_automatically
 from good_ass_pydantic_integrator import GAPICustomizer, generate_model
 
 from generate.constants import FILES_PATH, NANA_PATH
-from generate.utils import download_if_missing
+from generate.utils import download_if_missing, drop_redundant_recordings, load_ids
 from nana import Nana
 
-CONTENT_IDS = [
-    "14de3bf28d7153ff8d938f554b76dcf5",
-    "14de3bf28d7153ff8d938f554b76dcf5-2",
-    "1ca4ff63d6b65ca59b6607c4fd152f3c",
-    "2fa0eef93c07552da8c6f81988100b02",
-    "e04fbb4fc17c5dcc8c96023ac42e31df",
-]
+CONTENT_IDS = load_ids("ContentModel")
 """A series, one of its seasons, one of its episodes and two movies."""
 
 
@@ -40,6 +34,7 @@ def generate_content(client: Nana) -> None:
     customizer.add_additional_import("from datetime import datetime")
 
     generate_model(FILES_PATH, NANA_PATH, "ContentModel", customizer=customizer)
+    drop_redundant_recordings(FILES_PATH, "ContentModel")
 
 
 if __name__ == "__main__":

@@ -6,16 +6,12 @@ from __future__ import annotations
 import logging
 
 from get_around import build_client_automatically
-from good_ass_pydantic_integrator import generate_model
 
 from generate.constants import FILES_PATH, NANA_PATH
-from generate.utils import download_if_missing
+from generate.utils import download_if_missing, load_ids, rebuild_model
 from nana import Nana
 
-QUERIES = [
-    "blade runner 2049",
-    "walker texas ranger",
-]
+QUERIES = load_ids("SearchModel")
 
 
 # TODO: Validate
@@ -28,7 +24,7 @@ def generate_search(client: Nana) -> None:
             query,
             lambda query=query: client.search.download(query),
         )
-    generate_model(FILES_PATH, NANA_PATH, "SearchModel")
+    rebuild_model(FILES_PATH, NANA_PATH, "SearchModel")
 
 
 if __name__ == "__main__":
