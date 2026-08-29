@@ -1,37 +1,45 @@
 from datetime import datetime
 from typing import Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
+from pydantic import ConfigDict
 from pydantic import AwareDatetime, BaseModel, Field
 from typing import Any
 from uuid import UUID
 from datetime import date, time
 
 class DetailPoster(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
 
 class DetailBackground(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
 
 class ImageMap(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     detail_poster: DetailPoster = Field(..., alias='detailPoster')
     detail_background: DetailBackground = Field(..., alias='detailBackground')
 
 class Field100(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     size: int
     text: str
 
 class Descriptions(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     field_100: Field100 | None = Field(None, alias='100')
 
 class Image(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     tier: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
     type: str
 
 class Meta(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: str
@@ -39,10 +47,12 @@ class Meta(BaseModel):
     href: str
 
 class StagingWindow(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     start_time: int = Field(..., alias='startTime')
     end_time: int = Field(..., alias='endTime')
 
 class ProviderDetails(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     is_available: bool = Field(..., alias='isAvailable')
     index_source: str = Field(..., alias='indexSource')
     images: list[Image]
@@ -66,29 +76,35 @@ class ProviderDetails(BaseModel):
     staging_window: StagingWindow | None = Field(None, alias='stagingWindow')
 
 class AudioTrack(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     language: str
     iso639_part1: str = Field(..., alias='iso639Part1')
     label: str
     type: str | None = None
 
 class Data(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     pid: UUID
 
 class DrmAuthentication(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     drm_content_provider: str = Field(..., alias='drmContentProvider')
     data: Data
 
 class Video(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     video_type: str = Field(..., alias='videoType')
     drm_authentication: DrmAuthentication = Field(..., alias='drmAuthentication')
     url: str
     quality: str
 
 class TrickPlayFile(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     url: str
     quality: str
 
 class Caption(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     language: str
     iso639_part1: str = Field(..., alias='iso639Part1')
     label: str
@@ -96,6 +112,7 @@ class Caption(BaseModel):
     url: str
 
 class Media(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     audio_tracks: list[AudioTrack] = Field(..., alias='audioTracks')
     duration: int
     ad_breaks: list[time] | None = Field(None, alias='adBreaks')
@@ -107,6 +124,7 @@ class Media(BaseModel):
     validity_start_time: datetime = Field(None, alias='validityStartTime')
 
 class ViewOption(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     play_id: str = Field(..., alias='playId')
     license: str
     provider_id: str = Field(..., alias='providerId')
@@ -119,22 +137,27 @@ class ViewOption(BaseModel):
     ads_content_id: str | None = Field(None, alias='adsContentId')
 
 class Credit(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     role: str
     name: str
 
 class ClosingCredit(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     heading: str
     credits: list[Credit]
     credit_type: str = Field(..., alias='creditType')
 
 class CastAndCrew(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     closing_credits: list[ClosingCredit] = Field(..., alias='closingCredits')
     title: str
 
 class ImageMap1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     detail_poster: DetailPoster = Field(..., alias='detailPoster')
 
 class Meta1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: UUID
@@ -142,6 +165,7 @@ class Meta1(BaseModel):
     href: str
 
 class Credit1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     image_map: ImageMap1 | None = Field(None, alias='imageMap')
     role: str
     meta: Meta1
@@ -150,6 +174,7 @@ class Credit1(BaseModel):
     birth_date: date | None = Field(None, alias='birthDate')
 
 class Meta2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: UUID
@@ -159,16 +184,19 @@ class Meta2(BaseModel):
     wid: UUID
 
 class DrmAuthentication1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     drm_content_provider: str = Field(..., alias='drmContentProvider')
     data: Data
 
 class Video1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     video_type: str = Field(..., alias='videoType')
     drm_authentication: DrmAuthentication1 = Field(..., alias='drmAuthentication')
     url: str
     quality: str
 
 class Media1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     audio_tracks: list[AudioTrack] = Field(..., alias='audioTracks')
     duration: int
     ad_breaks: list[time] | None = Field(None, alias='adBreaks')
@@ -178,10 +206,12 @@ class Media1(BaseModel):
     captions: list[Caption]
 
 class PlaybackDetails(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     url: str
     auto_play_next_url: str | None = Field(None, alias='autoPlayNextURL')
 
 class Meta3(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     has_view_options: bool = Field(..., alias='hasViewOptions')
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
@@ -190,9 +220,11 @@ class Meta3(BaseModel):
     href: str
 
 class ProviderDetails1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta3
 
 class CreditCuePoint(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     start: int
     end: int
     skippable: bool
@@ -200,6 +232,7 @@ class CreditCuePoint(BaseModel):
     credit_type: str | None = Field(None, alias='creditType')
 
 class ViewOption1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     business_model: str = Field(..., alias='businessModel')
     is_unlocked: bool = Field(..., alias='isUnlocked')
     has_media: bool = Field(..., alias='hasMedia')
@@ -226,21 +259,25 @@ class ViewOption1(BaseModel):
     staging_start_time: str | None = Field(None, alias='stagingStartTime')
 
 class Episode(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta2
     season_number: str = Field(..., alias='seasonNumber')
     episode_number: str = Field(..., alias='episodeNumber')
     view_options: list[ViewOption1] = Field(..., alias='viewOptions')
 
 class Zone(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta3
 
 class Image1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     is_primary: bool | None = Field(None, alias='isPrimary')
     aspect_ratio: str = Field(..., alias='aspectRatio')
     type: str
 
 class Meta5(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     has_view_options: bool = Field(..., alias='hasViewOptions')
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
@@ -250,6 +287,7 @@ class Meta5(BaseModel):
     cid: str
 
 class CategoryObject(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     kids_appropriate: bool | None = Field(None, alias='kidsAppropriate')
     is_available: bool = Field(..., alias='isAvailable')
     index_source: str = Field(..., alias='indexSource')
@@ -284,22 +322,27 @@ class CategoryObject(BaseModel):
     sub_type: str = Field(..., alias='subType')
 
 class ParentalRating(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     code: str
     rating_source: str = Field(..., alias='ratingSource')
     rating_level: int = Field(..., alias='ratingLevel')
 
 class Image2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
 
 class ProviderBadge(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     image: Image2
     title: str
 
 class Image3(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
 
 class BottomLeftItem(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     badge_color: list[str] = Field(..., alias='badgeColor')
     image: Image3
     badge_type: str = Field(..., alias='badgeType')
@@ -311,9 +354,11 @@ class BottomLeftItem(BaseModel):
     text_color: str = Field(..., alias='textColor')
 
 class Grid(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     bottom_left: list[BottomLeftItem] = Field(..., alias='bottom-left')
 
 class BottomLeftItem1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     badge_color: list[str] = Field(..., alias='badgeColor')
     image: Image3
     badge_type: str = Field(..., alias='badgeType')
@@ -325,14 +370,17 @@ class BottomLeftItem1(BaseModel):
     text_color: str = Field(..., alias='textColor')
 
 class DetailScreen(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     bottom_left: list[BottomLeftItem1] = Field(..., alias='bottom-left')
 
 class Indicators(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     provider_badge: ProviderBadge = Field(..., alias='providerBadge')
     grid: Grid | None = None
     detail_screen: DetailScreen | None = Field(None, alias='detailScreen')
 
 class Meta6(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: UUID
@@ -341,10 +389,12 @@ class Meta6(BaseModel):
     sid: UUID
 
 class Series(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta6
     title: str
 
 class Meta7(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: UUID | str = Field(union_mode='left_to_right')
@@ -353,9 +403,11 @@ class Meta7(BaseModel):
     sid: UUID | str = Field(union_mode='left_to_right')
 
 class TrackerOverrides(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     item_server_data: str
 
 class Meta8(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     scope: str | None = None
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
@@ -365,6 +417,7 @@ class Meta8(BaseModel):
     sid: UUID
 
 class Meta9(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     scope: str | None = None
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
@@ -373,17 +426,21 @@ class Meta9(BaseModel):
     href: str
 
 class Series1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta9
     title: str
 
 class Next(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta8
     series: Series1 | None = None
 
 class ImageMap2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     detail_background: DetailBackground = Field(..., alias='detailBackground')
 
 class Meta10(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     has_view_options: bool = Field(..., alias='hasViewOptions')
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
@@ -392,6 +449,7 @@ class Meta10(BaseModel):
     href: str
 
 class Credit2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     role: str
     meta: Meta10
     name: str
@@ -399,6 +457,7 @@ class Credit2(BaseModel):
     birth_date: date | None = Field(None, alias='birthDate')
 
 class Meta11(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: str
@@ -408,13 +467,16 @@ class Meta11(BaseModel):
     has_view_options: bool | None = Field(None, alias='hasViewOptions')
 
 class Grid1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
 
 class ImageMap3(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     grid: Grid1
 
 class Image5(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     tier: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
@@ -423,6 +485,7 @@ class Image5(BaseModel):
     roku_id: str | None = Field(None, alias='rokuId')
 
 class Meta12(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: UUID
@@ -432,17 +495,21 @@ class Meta12(BaseModel):
     wid: UUID
 
 class Image6(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
 
 class ProviderBadge1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     image: Image6
     title: str
 
 class Indicators1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     provider_badge: ProviderBadge1 = Field(..., alias='providerBadge')
 
 class Meta13(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: str
@@ -450,18 +517,22 @@ class Meta13(BaseModel):
     href: str
 
 class ProviderDetails2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta13
 
 class Media2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     duration: int
 
 class ViewOption2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     provider_id: str = Field(..., alias='providerId')
     provider_details: ProviderDetails2 = Field(..., alias='providerDetails')
     is_unlocked: bool = Field(..., alias='isUnlocked')
     media: Media2
 
 class Episode1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     current_time: AwareDatetime = Field(..., alias='currentTime')
     image_map: ImageMap3 = Field(..., alias='imageMap')
     images: list[Image5]
@@ -475,19 +546,23 @@ class Episode1(BaseModel):
     view_options: list[ViewOption2] = Field(..., alias='viewOptions')
 
 class Credit3(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     role: str
     name: str
 
 class ClosingCredit1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     heading: str
     credits: list[Credit3]
     credit_type: str = Field(..., alias='creditType')
 
 class CastAndCrew1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     closing_credits: list[ClosingCredit1] = Field(..., alias='closingCredits')
     title: str
 
 class Season(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     image_map: ImageMap2 | None = Field(None, alias='imageMap')
     credits: list[Credit2] | None = None
     meta: Meta11
@@ -499,9 +574,11 @@ class Season(BaseModel):
     cast_and_crew: CastAndCrew1 | None = Field(None, alias='castAndCrew')
 
 class ImageMap4(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     grid: Grid1
 
 class Image7(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     tier: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
@@ -510,6 +587,7 @@ class Image7(BaseModel):
     roku_id: str | None = Field(None, alias='rokuId')
 
 class Meta15(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: UUID
@@ -517,17 +595,21 @@ class Meta15(BaseModel):
     href: str
 
 class Image8(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     path: str
     aspect_ratio: str = Field(..., alias='aspectRatio')
 
 class ProviderBadge2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     image: Image8
     title: str
 
 class Indicators2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     provider_badge: ProviderBadge2 = Field(..., alias='providerBadge')
 
 class Meta16(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     media_type: str = Field(..., alias='mediaType')
     href_v2: str = Field(..., alias='hrefV2')
     id: str
@@ -535,15 +617,18 @@ class Meta16(BaseModel):
     href: str
 
 class ProviderDetails3(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta16
 
 class ViewOption3(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     provider_id: str = Field(..., alias='providerId')
     provider_details: ProviderDetails3 = Field(..., alias='providerDetails')
     is_unlocked: bool = Field(..., alias='isUnlocked')
     media: Media2
 
 class Episode2(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     current_time: AwareDatetime = Field(..., alias='currentTime')
     image_map: ImageMap4 = Field(..., alias='imageMap')
     images: list[Image7]
@@ -557,10 +642,12 @@ class Episode2(BaseModel):
     view_options: list[ViewOption3] = Field(..., alias='viewOptions')
 
 class Season1(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     meta: Meta13
     episodes: list[Episode2]
 
 class ContentModel(BaseModel):
+    model_config = ConfigDict(defer_build=True)
     image_map: ImageMap = Field(..., alias='imageMap')
     type: str
     title: str

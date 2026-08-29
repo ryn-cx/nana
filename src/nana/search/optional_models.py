@@ -1,32 +1,32 @@
 from typing import Any, Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
-from uuid import UUID
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+from uuid import UUID
 
 class Meta(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     href: str | None = None
     id: str | None = None
     media_type: str | None = Field(None, alias='mediaType')
 
 class TrackerOverrides(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     collection_id: str | None = None
     query_params: str | None = None
     collection_params: str | None = None
 
 class Grid(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     path: str | None = None
     aspect_ratio: str | None = Field(None, alias='aspectRatio')
     roku_id: str | None = Field(None, alias='rokuId')
 
 class ImageMap(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     grid: Grid | None = None
 
 class Image(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     path: str | None = None
     tier: str | None = None
     provider_id: str | None = Field(None, alias='providerId')
@@ -36,25 +36,25 @@ class Image(BaseModel):
     is_primary: bool | None = Field(None, alias='isPrimary')
 
 class ParentalRating(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     code: str | None = None
 
 class Image1(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     path: str | None = None
     aspect_ratio: str | None = Field(None, alias='aspectRatio')
 
 class ProviderBadge(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     image: Image1 | None = None
     title: str | None = None
 
 class Image2(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     path: str | None = None
 
 class BottomLeftItem(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     badge_color: list[str] | None = Field(None, alias='badgeColor')
     image: Image2 | None = None
     badge_type: str | None = Field(None, alias='badgeType')
@@ -66,11 +66,11 @@ class BottomLeftItem(BaseModel):
     text_color: str | None = Field(None, alias='textColor')
 
 class Grid1(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     bottom_left: list[BottomLeftItem] | None = Field(None, alias='bottom-left')
 
 class BottomLeftItem1(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     badge_color: list[str] | None = Field(None, alias='badgeColor')
     image: Image2 | None = None
     badge_type: str | None = Field(None, alias='badgeType')
@@ -82,26 +82,26 @@ class BottomLeftItem1(BaseModel):
     text_color: str | None = Field(None, alias='textColor')
 
 class DetailScreen(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     bottom_left: list[BottomLeftItem1] | None = Field(None, alias='bottom-left')
 
 class Indicators(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     provider_badge: ProviderBadge | None = Field(None, alias='providerBadge')
     grid: Grid1 | None = None
     detail_screen: DetailScreen | None = Field(None, alias='detailScreen')
 
 class Field100(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     size: int | None = None
     text: str | None = None
 
 class Descriptions(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     field_100: Field100 | None = Field(None, alias='100')
 
 class Meta1(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     media_type: str | None = Field(None, alias='mediaType')
     href_v2: str | None = Field(None, alias='hrefV2')
     id: str | None = None
@@ -109,23 +109,23 @@ class Meta1(BaseModel):
     href: str | None = None
 
 class ProviderDetails(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     meta: Meta1 | None = None
     provider_product_ids: list[str] | None = Field(None, alias='providerProductIds')
 
 class ViewOption(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     provider_id: str | None = Field(None, alias='providerId')
     provider_details: ProviderDetails | None = Field(None, alias='providerDetails')
     provider_product_id: str | None = Field(None, alias='providerProductId')
 
 class AmpId(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     source: str | None = None
     id: str | None = None
 
 class Meta2(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     media_type: str | None = Field(None, alias='mediaType')
     href_v2: str | None = Field(None, alias='hrefV2')
     id: UUID | str | None = Field(default=None, union_mode='left_to_right')
@@ -134,20 +134,20 @@ class Meta2(BaseModel):
     sid: UUID | str | None = Field(default=None, union_mode='left_to_right')
 
 class TrackerOverrides1(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     item_server_data: str | None = None
 
 class Meta3(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     id: str | None = None
     sid: str | None = None
 
 class Season(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     meta: Meta3 | None = None
 
 class Content(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     image_map: ImageMap | None = Field(None, alias='imageMap')
     images: list[Image] | None = None
     run_time_seconds: int | None = Field(None, alias='runTimeSeconds')
@@ -170,25 +170,25 @@ class Content(BaseModel):
     end_date: AwareDatetime | None = Field(None, alias='endDate')
 
 class Search(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     confidence_score: int | float | None = Field(None, alias='confidenceScore')
 
 class Features(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     search: Search | None = None
 
 class Details(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     href: str | None = None
 
 class ViewItem(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     content: Content | None = None
     features: Features | None = None
     details: Details | None = None
 
 class SearchModel(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     meta: Meta | None = None
     type: str | None = None
     content_type: str | None = Field(None, alias='content-type')

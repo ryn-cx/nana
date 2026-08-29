@@ -1,33 +1,33 @@
 from typing import Any, Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
-from uuid import UUID
 from pydantic import BaseModel, ConfigDict, Field
+from uuid import UUID
 
 class Meta(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     id: str | None = None
     type: str | None = None
     path: str | None = None
 
 class Meta1(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     id: str | None = None
     type: str | None = None
 
 class ViewItem2(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     meta: Meta1 | None = None
     icon: str | None = None
     title: str | None = None
 
 class ViewItem1(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     view: list[ViewItem2] | None = None
     meta: Meta1 | None = None
     title: str | None = None
 
 class ViewItem(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     meta: Meta | None = None
     hideable: bool | None = None
     title_loc_key: str | None = Field(None, alias='titleLocKey')
@@ -39,17 +39,17 @@ class ViewItem(BaseModel):
     view: list[ViewItem1] | None = None
 
 class Meta3(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     version: int | None = None
     media_type: str | None = Field(None, alias='mediaType')
     id: str | None = None
 
 class TrackerOverrides(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     item_server_data: str | None = None
 
 class MenuModel(BaseModel):
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra='ignore', defer_build=True)
     id: str | None = None
     type: str | None = None
     view: list[ViewItem] | None = None
