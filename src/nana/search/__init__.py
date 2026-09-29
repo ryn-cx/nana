@@ -20,7 +20,7 @@ logger.addHandler(NullHandler())
 
 # TODO: Validate
 class Search(BaseEndpoint):
-    """Manage the search file.
+    """Contains the search.
 
     Search is the only endpoint that is not a GET, so it is the only one that
     needs a CSRF token.
@@ -55,7 +55,7 @@ class Search(BaseEndpoint):
 
     # TODO: Validate
     def __call__(self, query: str) -> SearchModel:
-        """Run the search and return the model it is read into."""
+        """Download and parse the search file."""
         log_id = self.get_log_id(self.__call__, locals())
         return self.load(self.download(query), log_id)
 
@@ -80,7 +80,7 @@ class Search(BaseEndpoint):
 
     # TODO: Validate
     def load(self, data: str, log_id: str = "") -> SearchModel:
-        """Read a downloaded search file into its model."""
+        """Load a search file into its model."""
         return model_validate_json(data, log_id or self.default_log_id)
 
     # TODO: Validate

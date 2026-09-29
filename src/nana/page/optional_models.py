@@ -5,367 +5,367 @@ from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 class Details(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    href: str | None = None
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Grid(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
-    roku_id: str | None = Field(None, alias='rokuId')
-    tier: str | None = None
-    type: str | None = None
-    tms_image_type: str | None = Field(None, alias='tmsImageType')
-    is_personalized: bool | None = Field(None, alias='isPersonalized')
-    parent_id: UUID | None = Field(None, alias='parentId')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
+    roku_id: str | Any = Field(None, alias='rokuId', union_mode='left_to_right')
+    tier: str | Any = Field(default=None, union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    tms_image_type: str | Any = Field(None, alias='tmsImageType', union_mode='left_to_right')
+    is_personalized: bool | Any = Field(None, alias='isPersonalized', union_mode='left_to_right')
+    parent_id: UUID | Any = Field(None, alias='parentId', union_mode='left_to_right')
 
 class ImageMap(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    grid: Grid | None = None
+    grid: Grid | Any = Field(default=None, union_mode='left_to_right')
 
 class ParentalRating(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    code: str | None = None
+    code: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: str | None = None
-    source: str | None = None
-    href: str | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class ProviderDetails(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta | None = None
-    provider_product_ids: list[str] | None = Field(None, alias='providerProductIds')
+    meta: Meta | Any = Field(default=None, union_mode='left_to_right')
+    provider_product_ids: list[str] | Any = Field(None, alias='providerProductIds', union_mode='left_to_right')
 
 class ViewOption(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    provider_id: str | None = Field(None, alias='providerId')
-    provider_details: ProviderDetails | None = Field(None, alias='providerDetails')
-    is_unlocked: bool | None = Field(None, alias='isUnlocked')
-    provider_product_id: str | None = Field(None, alias='providerProductId')
-    recording_type: str | None = Field(None, alias='recordingType')
+    provider_id: str | Any = Field(None, alias='providerId', union_mode='left_to_right')
+    provider_details: ProviderDetails | Any = Field(None, alias='providerDetails', union_mode='left_to_right')
+    is_unlocked: bool | Any = Field(None, alias='isUnlocked', union_mode='left_to_right')
+    provider_product_id: str | Any = Field(None, alias='providerProductId', union_mode='left_to_right')
+    recording_type: str | Any = Field(None, alias='recordingType', union_mode='left_to_right')
 
 class Attribution(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class ImageMap1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    attribution: Attribution | None = None
+    attribution: Attribution | Any = Field(default=None, union_mode='left_to_right')
 
 class Line2Item(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    has_cta: bool | None = Field(None, alias='hasCta')
-    text: str | None = None
-    optional: bool | None = None
-    font: str | None = None
+    has_cta: bool | Any = Field(None, alias='hasCta', union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    optional: bool | Any = Field(default=None, union_mode='left_to_right')
+    font: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Line1Item(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    has_cta: bool | None = Field(None, alias='hasCta')
-    text: str | None = None
-    font: str | None = None
+    has_cta: bool | Any = Field(None, alias='hasCta', union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    font: str | Any = Field(default=None, union_mode='left_to_right')
 
 class GridItem(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image_map: ImageMap1 | None = Field(None, alias='imageMap')
-    product_provider_ids: list[str] | None = Field(None, alias='productProviderIds')
-    has_media: bool | None = Field(None, alias='hasMedia')
-    free: bool | None = None
-    line2: list[Line2Item] | None = None
-    line1: list[Line1Item] | None = None
+    image_map: ImageMap1 | Any = Field(None, alias='imageMap', union_mode='left_to_right')
+    product_provider_ids: list[str] | Any = Field(None, alias='productProviderIds', union_mode='left_to_right')
+    has_media: bool | Any = Field(None, alias='hasMedia', union_mode='left_to_right')
+    free: bool | Any = Field(default=None, union_mode='left_to_right')
+    line2: list[Line2Item] | Any = Field(default=None, union_mode='left_to_right')
+    line1: list[Line1Item] | Any = Field(default=None, union_mode='left_to_right')
 
 class Bobs(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    grid: list[GridItem] | None = None
+    grid: list[GridItem] | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | str | None = Field(default=None, union_mode='left_to_right')
-    source: str | None = None
-    href: str | None = None
-    sid: UUID | str | None = Field(default=None, union_mode='left_to_right')
-    version: int | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    sid: UUID | str | Any = Field(default=None, union_mode='left_to_right')
+    version: int | Any = Field(default=None, union_mode='left_to_right')
 
 class TrackerOverrides(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    item_server_data: str | None = None
+    item_server_data: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Image(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
+    path: str | Any = Field(default=None, union_mode='left_to_right')
 
 class TopRightItem(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    badge_color: list[str] | None = Field(None, alias='badgeColor')
-    image: Image | None = None
-    badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
-    id: UUID | None = None
-    text: str | None = None
-    text_color: str | None = Field(None, alias='textColor')
+    badge_color: list[str] | Any = Field(None, alias='badgeColor', union_mode='left_to_right')
+    image: Image | Any = Field(default=None, union_mode='left_to_right')
+    badge_type: str | Any = Field(None, alias='badgeType', union_mode='left_to_right')
+    validity_end_time: AwareDatetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: AwareDatetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    text_color: str | Any = Field(None, alias='textColor', union_mode='left_to_right')
 
 class BottomLeftItem(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    badge_color: list[str] | None = Field(None, alias='badgeColor')
-    image: Image | None = None
-    badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
-    id: UUID | None = None
-    text: str | None = None
-    audioguide: str | None = None
-    text_color: str | None = Field(None, alias='textColor')
+    badge_color: list[str] | Any = Field(None, alias='badgeColor', union_mode='left_to_right')
+    image: Image | Any = Field(default=None, union_mode='left_to_right')
+    badge_type: str | Any = Field(None, alias='badgeType', union_mode='left_to_right')
+    validity_end_time: AwareDatetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: AwareDatetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    audioguide: str | Any = Field(default=None, union_mode='left_to_right')
+    text_color: str | Any = Field(None, alias='textColor', union_mode='left_to_right')
 
 class Grid1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    top_right: list[TopRightItem] | None = Field(None, alias='top-right')
-    bottom_left: list[BottomLeftItem] | None = Field(None, alias='bottom-left')
+    top_right: list[TopRightItem] | Any = Field(None, alias='top-right', union_mode='left_to_right')
+    bottom_left: list[BottomLeftItem] | Any = Field(None, alias='bottom-left', union_mode='left_to_right')
 
 class Image2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class ProviderBadge(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image: Image2 | None = None
-    title: str | None = None
+    image: Image2 | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Image3(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
+    path: str | Any = Field(default=None, union_mode='left_to_right')
 
 class BottomLeftItem1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    badge_color: list[str] | None = Field(None, alias='badgeColor')
-    image: Image3 | None = None
-    badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
-    id: UUID | None = None
-    text: str | None = None
-    audioguide: str | None = None
-    text_color: str | None = Field(None, alias='textColor')
+    badge_color: list[str] | Any = Field(None, alias='badgeColor', union_mode='left_to_right')
+    image: Image3 | Any = Field(default=None, union_mode='left_to_right')
+    badge_type: str | Any = Field(None, alias='badgeType', union_mode='left_to_right')
+    validity_end_time: AwareDatetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: AwareDatetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    audioguide: str | Any = Field(default=None, union_mode='left_to_right')
+    text_color: str | Any = Field(None, alias='textColor', union_mode='left_to_right')
 
 class TopRightItem1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    badge_color: list[str] | None = Field(None, alias='badgeColor')
-    image: Image3 | None = None
-    badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
-    id: UUID | None = None
-    text: str | None = None
-    text_color: str | None = Field(None, alias='textColor')
+    badge_color: list[str] | Any = Field(None, alias='badgeColor', union_mode='left_to_right')
+    image: Image3 | Any = Field(default=None, union_mode='left_to_right')
+    badge_type: str | Any = Field(None, alias='badgeType', union_mode='left_to_right')
+    validity_end_time: AwareDatetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: AwareDatetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    text_color: str | Any = Field(None, alias='textColor', union_mode='left_to_right')
 
 class DetailScreen(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    bottom_left: list[BottomLeftItem1] | None = Field(None, alias='bottom-left')
-    top_right: list[TopRightItem1] | None = Field(None, alias='top-right')
+    bottom_left: list[BottomLeftItem1] | Any = Field(None, alias='bottom-left', union_mode='left_to_right')
+    top_right: list[TopRightItem1] | Any = Field(None, alias='top-right', union_mode='left_to_right')
 
 class Indicators(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    grid: Grid1 | None = None
-    provider_badge: ProviderBadge | None = Field(None, alias='providerBadge')
-    detail_screen: DetailScreen | None = Field(None, alias='detailScreen')
+    grid: Grid1 | Any = Field(default=None, union_mode='left_to_right')
+    provider_badge: ProviderBadge | Any = Field(None, alias='providerBadge', union_mode='left_to_right')
+    detail_screen: DetailScreen | Any = Field(None, alias='detailScreen', union_mode='left_to_right')
 
 class CenterOverlay(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    text: str | None = None
+    text: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Layout(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    center_overlay: CenterOverlay | None = Field(None, alias='centerOverlay')
+    center_overlay: CenterOverlay | Any = Field(None, alias='centerOverlay', union_mode='left_to_right')
 
 class Image5(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    tier: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
-    type: str | None = None
-    tms_image_type: str | None = Field(None, alias='tmsImageType')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    tier: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    tms_image_type: str | Any = Field(None, alias='tmsImageType', union_mode='left_to_right')
 
 class ImageUrl(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    is_still_image: bool | None = Field(None, alias='isStillImage')
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
-    url: str | None = None
+    is_still_image: bool | Any = Field(None, alias='isStillImage', union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
+    url: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Content(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image_map: ImageMap | None = Field(None, alias='imageMap')
-    release_date: AwareDatetime | None = Field(None, alias='releaseDate')
-    parental_ratings: list[ParentalRating] | None = Field(None, alias='parentalRatings')
-    type: str | None = None
-    title: str | None = None
-    view_options: list[ViewOption] | None = Field(None, alias='viewOptions')
-    bobs: Bobs | None = None
-    current_time: AwareDatetime | None = Field(None, alias='currentTime')
-    seasons_count: int | None = Field(None, alias='seasonsCount')
-    kids_directed: bool | None = Field(None, alias='kidsDirected')
-    meta: Meta1 | None = None
-    release_year: int | None = Field(None, alias='releaseYear')
-    savable: bool | None = None
-    tracker_overrides: TrackerOverrides | None = Field(None, alias='trackerOverrides')
-    indicators: Indicators | None = None
-    layout: Layout | None = None
-    images: list[Image5] | None = None
-    image_urls: list[ImageUrl] | None = Field(None, alias='imageUrls')
-    description: str | None = None
-    kids_mode: bool | None = Field(None, alias='kidsMode')
-    is_private: bool | None = Field(None, alias='isPrivate')
+    image_map: ImageMap | Any = Field(None, alias='imageMap', union_mode='left_to_right')
+    release_date: AwareDatetime | Any = Field(None, alias='releaseDate', union_mode='left_to_right')
+    parental_ratings: list[ParentalRating] | Any = Field(None, alias='parentalRatings', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    view_options: list[ViewOption] | Any = Field(None, alias='viewOptions', union_mode='left_to_right')
+    bobs: Bobs | Any = Field(default=None, union_mode='left_to_right')
+    current_time: AwareDatetime | Any = Field(None, alias='currentTime', union_mode='left_to_right')
+    seasons_count: int | Any = Field(None, alias='seasonsCount', union_mode='left_to_right')
+    kids_directed: bool | Any = Field(None, alias='kidsDirected', union_mode='left_to_right')
+    meta: Meta1 | Any = Field(default=None, union_mode='left_to_right')
+    release_year: int | Any = Field(None, alias='releaseYear', union_mode='left_to_right')
+    savable: bool | Any = Field(default=None, union_mode='left_to_right')
+    tracker_overrides: TrackerOverrides | Any = Field(None, alias='trackerOverrides', union_mode='left_to_right')
+    indicators: Indicators | Any = Field(default=None, union_mode='left_to_right')
+    layout: Layout | Any = Field(default=None, union_mode='left_to_right')
+    images: list[Image5] | Any = Field(default=None, union_mode='left_to_right')
+    image_urls: list[ImageUrl] | Any = Field(None, alias='imageUrls', union_mode='left_to_right')
+    description: str | Any = Field(default=None, union_mode='left_to_right')
+    kids_mode: bool | Any = Field(None, alias='kidsMode', union_mode='left_to_right')
+    is_private: bool | Any = Field(None, alias='isPrivate', union_mode='left_to_right')
 
 class ViewItem(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    details: Details | None = None
-    content: Content | None = None
+    details: Details | Any = Field(default=None, union_mode='left_to_right')
+    content: Content | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href: str | None = None
-    id: str | None = None
-    version: int | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    version: int | Any = Field(default=None, union_mode='left_to_right')
 
 class TrackerOverrides1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    collection_id: str | None = None
-    query_params: str | None = None
-    collection_params: str | None = None
-    category_ids: str | None = None
-    row_server_data: str | None = None
+    collection_id: str | Any = Field(default=None, union_mode='left_to_right')
+    query_params: str | Any = Field(default=None, union_mode='left_to_right')
+    collection_params: str | Any = Field(default=None, union_mode='left_to_right')
+    category_ids: str | Any = Field(default=None, union_mode='left_to_right')
+    row_server_data: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Collection(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    playback_context_params: str | None = Field(None, alias='playbackContextParams')
-    collection_type: str | None = Field(None, alias='collectionType')
-    view: list[ViewItem] | None = None
-    meta: Meta2 | None = None
-    content_type: str | None = Field(None, alias='content-type')
-    type: str | None = None
-    title: str | None = None
-    tracker_overrides: TrackerOverrides1 | None = Field(None, alias='trackerOverrides')
-    invalidate_on: list[str] | None = Field(None, alias='invalidateOn')
-    actions: list[str] | None = None
+    playback_context_params: str | Any = Field(None, alias='playbackContextParams', union_mode='left_to_right')
+    collection_type: str | Any = Field(None, alias='collectionType', union_mode='left_to_right')
+    view: list[ViewItem] | Any = Field(default=None, union_mode='left_to_right')
+    meta: Meta2 | Any = Field(default=None, union_mode='left_to_right')
+    content_type: str | Any = Field(None, alias='content-type', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    tracker_overrides: TrackerOverrides1 | Any = Field(None, alias='trackerOverrides', union_mode='left_to_right')
+    invalidate_on: list[str] | Any = Field(None, alias='invalidateOn', union_mode='left_to_right')
+    actions: list[str] | Any = Field(default=None, union_mode='left_to_right')
 
 class Image6(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    relative_height: float | None = Field(None, alias='relativeHeight')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    relative_height: float | Any = Field(None, alias='relativeHeight', union_mode='left_to_right')
 
 class BottomLeftItem2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image: Image6 | None = None
-    alt_text: str | None = Field(None, alias='altText')
-    validity_end_time: AwareDatetime | None = Field(None, alias='validityEndTime')
-    validity_start_time: AwareDatetime | None = Field(None, alias='validityStartTime')
-    id: UUID | None = None
+    image: Image6 | Any = Field(default=None, union_mode='left_to_right')
+    alt_text: str | Any = Field(None, alias='altText', union_mode='left_to_right')
+    validity_end_time: AwareDatetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: AwareDatetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
 
 class Grid2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    bottom_left: list[BottomLeftItem2] | None = Field(None, alias='bottom-left')
+    bottom_left: list[BottomLeftItem2] | Any = Field(None, alias='bottom-left', union_mode='left_to_right')
 
 class Indicators1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    grid: Grid2 | None = None
+    grid: Grid2 | Any = Field(default=None, union_mode='left_to_right')
 
 class Favorite(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    indicators: Indicators1 | None = None
+    indicators: Indicators1 | Any = Field(default=None, union_mode='left_to_right')
 
 class ActionItems(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    favorite: Favorite | None = None
+    favorite: Favorite | Any = Field(default=None, union_mode='left_to_right')
 
 class Context(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    more_like_this_svc_url: str | None = Field(None, alias='moreLikeThisSvcUrl')
-    action_items: ActionItems | None = Field(None, alias='actionItems')
-    postman_url: str | None = Field(None, alias='postmanUrl')
-    epg_browse_url: str | None = Field(None, alias='epgBrowseUrl')
-    image_svc_host: str | None = Field(None, alias='imageSvcHost')
-    epg_schedule_patch_url: str | None = Field(None, alias='epgSchedulePatchUrl')
-    watchlist_collection_url: str | None = Field(None, alias='watchlistCollectionUrl')
-    watchlist_remote_collection_url: str | None = Field(None, alias='watchlistRemoteCollectionUrl')
-    epg_row_url: str | None = Field(None, alias='epgRowUrl')
-    epg_splash_uri: str | None = Field(None, alias='epgSplashUri')
-    rights_manager_host: str | None = Field(None, alias='rightsManagerHost')
-    drm: str | None = None
-    in_app_search_svc_url: str | None = Field(None, alias='inAppSearchSvcUrl')
-    epg_page_url: str | None = Field(None, alias='epgPageUrl')
-    text_vsr_one_stage_search_page_url: str | None = Field(None, alias='textVsrOneStageSearchPageUrl')
-    in_app_search_svc_preview_url: str | None = Field(None, alias='inAppSearchSvcPreviewUrl')
-    search_session_url: str | None = Field(None, alias='searchSessionUrl')
-    trace_relay_svc_url: str | None = Field(None, alias='traceRelaySvcUrl')
-    kids_profile_settings_url: str | None = Field(None, alias='kidsProfileSettingsUrl')
-    continue_watching_collection_url: str | None = Field(None, alias='continueWatchingCollectionUrl')
+    more_like_this_svc_url: str | Any = Field(None, alias='moreLikeThisSvcUrl', union_mode='left_to_right')
+    action_items: ActionItems | Any = Field(None, alias='actionItems', union_mode='left_to_right')
+    postman_url: str | Any = Field(None, alias='postmanUrl', union_mode='left_to_right')
+    epg_browse_url: str | Any = Field(None, alias='epgBrowseUrl', union_mode='left_to_right')
+    image_svc_host: str | Any = Field(None, alias='imageSvcHost', union_mode='left_to_right')
+    epg_schedule_patch_url: str | Any = Field(None, alias='epgSchedulePatchUrl', union_mode='left_to_right')
+    watchlist_collection_url: str | Any = Field(None, alias='watchlistCollectionUrl', union_mode='left_to_right')
+    watchlist_remote_collection_url: str | Any = Field(None, alias='watchlistRemoteCollectionUrl', union_mode='left_to_right')
+    epg_row_url: str | Any = Field(None, alias='epgRowUrl', union_mode='left_to_right')
+    epg_splash_uri: str | Any = Field(None, alias='epgSplashUri', union_mode='left_to_right')
+    rights_manager_host: str | Any = Field(None, alias='rightsManagerHost', union_mode='left_to_right')
+    drm: str | Any = Field(default=None, union_mode='left_to_right')
+    in_app_search_svc_url: str | Any = Field(None, alias='inAppSearchSvcUrl', union_mode='left_to_right')
+    epg_page_url: str | Any = Field(None, alias='epgPageUrl', union_mode='left_to_right')
+    text_vsr_one_stage_search_page_url: str | Any = Field(None, alias='textVsrOneStageSearchPageUrl', union_mode='left_to_right')
+    in_app_search_svc_preview_url: str | Any = Field(None, alias='inAppSearchSvcPreviewUrl', union_mode='left_to_right')
+    search_session_url: str | Any = Field(None, alias='searchSessionUrl', union_mode='left_to_right')
+    trace_relay_svc_url: str | Any = Field(None, alias='traceRelaySvcUrl', union_mode='left_to_right')
+    kids_profile_settings_url: str | Any = Field(None, alias='kidsProfileSettingsUrl', union_mode='left_to_right')
+    continue_watching_collection_url: str | Any = Field(None, alias='continueWatchingCollectionUrl', union_mode='left_to_right')
 
 class TrackerBeacon(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    quote_escape: str | None = Field(None, alias='quoteEscape')
-    method: str | None = None
-    body: str | None = None
-    url: str | None = None
-    events: list[str] | None = None
+    quote_escape: str | Any = Field(None, alias='quoteEscape', union_mode='left_to_right')
+    method: str | Any = Field(default=None, union_mode='left_to_right')
+    body: str | Any = Field(default=None, union_mode='left_to_right')
+    url: str | Any = Field(default=None, union_mode='left_to_right')
+    events: list[str] | Any = Field(default=None, union_mode='left_to_right')
 
 class Template(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    type: str | None = None
+    type: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Colors(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    highlight_color: str | None = Field(None, alias='highlightColor')
-    background_color: str | None = Field(None, alias='backgroundColor')
-    progress_color: str | None = Field(None, alias='progressColor')
-    theme: str | None = None
-    overlay_color: str | None = Field(None, alias='overlayColor')
-    text_color: str | None = Field(None, alias='textColor')
+    highlight_color: str | Any = Field(None, alias='highlightColor', union_mode='left_to_right')
+    background_color: str | Any = Field(None, alias='backgroundColor', union_mode='left_to_right')
+    progress_color: str | Any = Field(None, alias='progressColor', union_mode='left_to_right')
+    theme: str | Any = Field(default=None, union_mode='left_to_right')
+    overlay_color: str | Any = Field(None, alias='overlayColor', union_mode='left_to_right')
+    text_color: str | Any = Field(None, alias='textColor', union_mode='left_to_right')
 
 class Layout1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    overlay_title: bool | None = Field(None, alias='overlayTitle')
-    template: Template | None = None
-    colors: Colors | None = None
+    overlay_title: bool | Any = Field(None, alias='overlayTitle', union_mode='left_to_right')
+    template: Template | Any = Field(default=None, union_mode='left_to_right')
+    colors: Colors | Any = Field(default=None, union_mode='left_to_right')
 
 class TrackerOverrides2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    page_server_data: str | None = None
-    page_id: str | None = None
+    page_server_data: str | Any = Field(default=None, union_mode='left_to_right')
+    page_id: str | Any = Field(default=None, union_mode='left_to_right')
 
 class DynamicCollectionIndex(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    savelist: int | None = None
-    continue_watching: int | None = Field(None, alias='continueWatching')
+    savelist: int | Any = Field(default=None, union_mode='left_to_right')
+    continue_watching: int | Any = Field(None, alias='continueWatching', union_mode='left_to_right')
 
 class Treacle(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    dynamic_collection_index: DynamicCollectionIndex | None = Field(None, alias='dynamicCollectionIndex')
+    dynamic_collection_index: DynamicCollectionIndex | Any = Field(None, alias='dynamicCollectionIndex', union_mode='left_to_right')
 
 class PageModel(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    no_utility_row: bool | None = Field(None, alias='noUtilityRow')
-    is_private: bool | None = Field(None, alias='isPrivate')
-    type: str | None = None
-    title: str | None = None
-    collections: list[Collection] | None = None
-    context: Context | None = None
-    kids_mode: bool | None = Field(None, alias='kidsMode')
-    content_type: str | None = Field(None, alias='content-type')
-    tracker_beacons: list[TrackerBeacon] | None = Field(None, alias='trackerBeacons')
-    playback_context_params: str | None = Field(None, alias='playbackContextParams')
-    layout: Layout1 | None = None
-    meta: Meta2 | None = None
-    auto_play: bool | None = Field(None, alias='autoPlay')
-    tracker_overrides: TrackerOverrides2 | None = Field(None, alias='trackerOverrides')
-    trace_id: UUID | None = Field(None, alias='traceId')
-    treacle: Treacle | None = None
+    no_utility_row: bool | Any = Field(None, alias='noUtilityRow', union_mode='left_to_right')
+    is_private: bool | Any = Field(None, alias='isPrivate', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    collections: list[Collection] | Any = Field(default=None, union_mode='left_to_right')
+    context: Context | Any = Field(default=None, union_mode='left_to_right')
+    kids_mode: bool | Any = Field(None, alias='kidsMode', union_mode='left_to_right')
+    content_type: str | Any = Field(None, alias='content-type', union_mode='left_to_right')
+    tracker_beacons: list[TrackerBeacon] | Any = Field(None, alias='trackerBeacons', union_mode='left_to_right')
+    playback_context_params: str | Any = Field(None, alias='playbackContextParams', union_mode='left_to_right')
+    layout: Layout1 | Any = Field(default=None, union_mode='left_to_right')
+    meta: Meta2 | Any = Field(default=None, union_mode='left_to_right')
+    auto_play: bool | Any = Field(None, alias='autoPlay', union_mode='left_to_right')
+    tracker_overrides: TrackerOverrides2 | Any = Field(None, alias='trackerOverrides', union_mode='left_to_right')
+    trace_id: UUID | Any = Field(None, alias='traceId', union_mode='left_to_right')
+    treacle: Treacle | Any = Field(default=None, union_mode='left_to_right')
     _raw_input: Any = PrivateAttr(default=None)
 
     @model_validator(mode='wrap')

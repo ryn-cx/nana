@@ -8,678 +8,678 @@ from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 class DetailPoster(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class DetailBackground(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class ImageMap(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    detail_poster: DetailPoster | None = Field(None, alias='detailPoster')
-    detail_background: DetailBackground | None = Field(None, alias='detailBackground')
+    detail_poster: DetailPoster | Any = Field(None, alias='detailPoster', union_mode='left_to_right')
+    detail_background: DetailBackground | Any = Field(None, alias='detailBackground', union_mode='left_to_right')
 
 class Field100(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    size: int | None = None
-    text: str | None = None
+    size: int | Any = Field(default=None, union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Descriptions(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    field_100: Field100 | None = Field(None, alias='100')
+    field_100: Field100 | Any = Field(None, alias='100', union_mode='left_to_right')
 
 class Image(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    tier: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
-    type: str | None = None
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    tier: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: str | None = None
-    source: str | None = None
-    href: str | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class StagingWindow(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    start_time: int | None = Field(None, alias='startTime')
-    end_time: int | None = Field(None, alias='endTime')
+    start_time: int | Any = Field(None, alias='startTime', union_mode='left_to_right')
+    end_time: int | Any = Field(None, alias='endTime', union_mode='left_to_right')
 
 class ProviderDetails(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    is_available: bool | None = Field(None, alias='isAvailable')
-    index_source: str | None = Field(None, alias='indexSource')
-    images: list[Image] | None = None
-    description: str | None = None
-    language: str | None = None
-    is_private: bool | None = Field(None, alias='isPrivate')
-    type: str | None = None
-    title: str | None = None
-    descriptions: dict[str, Any] | None = None
-    unlocked: bool | None = None
-    searchable: bool | None = None
-    tags: list[Any] | None = None
-    use_provider_descriptions: bool | None = Field(None, alias='useProviderDescriptions')
-    index_type: str | None = Field(None, alias='indexType')
-    meta: Meta | None = None
-    channel_store_code: str | None = Field(None, alias='channelStoreCode')
-    regions_images: list[Any] | None = Field(None, alias='regionsImages')
-    default_program_locale: str | None = Field(None, alias='defaultProgramLocale')
-    provider_product_ids: list[str] | None = Field(None, alias='providerProductIds')
-    short_description: str | None = Field(None, alias='shortDescription')
-    staging_window: StagingWindow | None = Field(None, alias='stagingWindow')
+    is_available: bool | Any = Field(None, alias='isAvailable', union_mode='left_to_right')
+    index_source: str | Any = Field(None, alias='indexSource', union_mode='left_to_right')
+    images: list[Image] | Any = Field(default=None, union_mode='left_to_right')
+    description: str | Any = Field(default=None, union_mode='left_to_right')
+    language: str | Any = Field(default=None, union_mode='left_to_right')
+    is_private: bool | Any = Field(None, alias='isPrivate', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    descriptions: dict[str, Any] | Any = Field(default=None, union_mode='left_to_right')
+    unlocked: bool | Any = Field(default=None, union_mode='left_to_right')
+    searchable: bool | Any = Field(default=None, union_mode='left_to_right')
+    tags: list[Any] | Any = Field(default=None, union_mode='left_to_right')
+    use_provider_descriptions: bool | Any = Field(None, alias='useProviderDescriptions', union_mode='left_to_right')
+    index_type: str | Any = Field(None, alias='indexType', union_mode='left_to_right')
+    meta: Meta | Any = Field(default=None, union_mode='left_to_right')
+    channel_store_code: str | Any = Field(None, alias='channelStoreCode', union_mode='left_to_right')
+    regions_images: list[Any] | Any = Field(None, alias='regionsImages', union_mode='left_to_right')
+    default_program_locale: str | Any = Field(None, alias='defaultProgramLocale', union_mode='left_to_right')
+    provider_product_ids: list[str] | Any = Field(None, alias='providerProductIds', union_mode='left_to_right')
+    short_description: str | Any = Field(None, alias='shortDescription', union_mode='left_to_right')
+    staging_window: StagingWindow | Any = Field(None, alias='stagingWindow', union_mode='left_to_right')
 
 class AudioTrack(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    language: str | None = None
-    iso639_part1: str | None = Field(None, alias='iso639Part1')
-    label: str | None = None
-    type: str | None = None
+    language: str | Any = Field(default=None, union_mode='left_to_right')
+    iso639_part1: str | Any = Field(None, alias='iso639Part1', union_mode='left_to_right')
+    label: str | Any = Field(default=None, union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Data(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    pid: UUID | None = None
+    pid: UUID | Any = Field(default=None, union_mode='left_to_right')
 
 class DrmAuthentication(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    drm_content_provider: str | None = Field(None, alias='drmContentProvider')
-    data: Data | None = None
+    drm_content_provider: str | Any = Field(None, alias='drmContentProvider', union_mode='left_to_right')
+    data: Data | Any = Field(default=None, union_mode='left_to_right')
 
 class Video(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    video_type: str | None = Field(None, alias='videoType')
-    drm_authentication: DrmAuthentication | None = Field(None, alias='drmAuthentication')
-    url: str | None = None
-    quality: str | None = None
+    video_type: str | Any = Field(None, alias='videoType', union_mode='left_to_right')
+    drm_authentication: DrmAuthentication | Any = Field(None, alias='drmAuthentication', union_mode='left_to_right')
+    url: str | Any = Field(default=None, union_mode='left_to_right')
+    quality: str | Any = Field(default=None, union_mode='left_to_right')
 
 class TrickPlayFile(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    url: str | None = None
-    quality: str | None = None
+    url: str | Any = Field(default=None, union_mode='left_to_right')
+    quality: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Caption(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    language: str | None = None
-    iso639_part1: str | None = Field(None, alias='iso639Part1')
-    label: str | None = None
-    caption_type: str | None = Field(None, alias='captionType')
-    url: str | None = None
+    language: str | Any = Field(default=None, union_mode='left_to_right')
+    iso639_part1: str | Any = Field(None, alias='iso639Part1', union_mode='left_to_right')
+    label: str | Any = Field(default=None, union_mode='left_to_right')
+    caption_type: str | Any = Field(None, alias='captionType', union_mode='left_to_right')
+    url: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Media(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    audio_tracks: list[AudioTrack] | None = Field(None, alias='audioTracks')
-    duration: int | None = None
-    ad_breaks: list[time] | None = Field(None, alias='adBreaks')
-    original_audio_language: str | None = Field(None, alias='originalAudioLanguage')
-    videos: list[Video] | None = None
-    trick_play_files: list[TrickPlayFile] | None = Field(None, alias='trickPlayFiles')
-    captions: list[Caption] | None = None
-    validity_end_time: datetime = Field(None, alias='validityEndTime')
-    validity_start_time: datetime = Field(None, alias='validityStartTime')
+    audio_tracks: list[AudioTrack] | Any = Field(None, alias='audioTracks', union_mode='left_to_right')
+    duration: int | Any = Field(default=None, union_mode='left_to_right')
+    ad_breaks: list[time] | Any = Field(None, alias='adBreaks', union_mode='left_to_right')
+    original_audio_language: str | Any = Field(None, alias='originalAudioLanguage', union_mode='left_to_right')
+    videos: list[Video] | Any = Field(default=None, union_mode='left_to_right')
+    trick_play_files: list[TrickPlayFile] | Any = Field(None, alias='trickPlayFiles', union_mode='left_to_right')
+    captions: list[Caption] | Any = Field(default=None, union_mode='left_to_right')
+    validity_end_time: datetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: datetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
 
 class ViewOption(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    play_id: str | None = Field(None, alias='playId')
-    license: str | None = None
-    provider_id: str | None = Field(None, alias='providerId')
-    provider_details: ProviderDetails | None = Field(None, alias='providerDetails')
-    is_unlocked: bool | None = Field(None, alias='isUnlocked')
-    media: Media | None = None
-    provider_name: str | None = Field(None, alias='providerName')
-    ads_provider_id: str | None = Field(None, alias='adsProviderId')
-    provider_product_id: str | None = Field(None, alias='providerProductId')
-    ads_content_id: str | None = Field(None, alias='adsContentId')
+    play_id: str | Any = Field(None, alias='playId', union_mode='left_to_right')
+    license: str | Any = Field(default=None, union_mode='left_to_right')
+    provider_id: str | Any = Field(None, alias='providerId', union_mode='left_to_right')
+    provider_details: ProviderDetails | Any = Field(None, alias='providerDetails', union_mode='left_to_right')
+    is_unlocked: bool | Any = Field(None, alias='isUnlocked', union_mode='left_to_right')
+    media: Media | Any = Field(default=None, union_mode='left_to_right')
+    provider_name: str | Any = Field(None, alias='providerName', union_mode='left_to_right')
+    ads_provider_id: str | Any = Field(None, alias='adsProviderId', union_mode='left_to_right')
+    provider_product_id: str | Any = Field(None, alias='providerProductId', union_mode='left_to_right')
+    ads_content_id: str | Any = Field(None, alias='adsContentId', union_mode='left_to_right')
 
 class Credit(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    role: str | None = None
-    name: str | None = None
+    role: str | Any = Field(default=None, union_mode='left_to_right')
+    name: str | Any = Field(default=None, union_mode='left_to_right')
 
 class ClosingCredit(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    heading: str | None = None
-    credits: list[Credit] | None = None
-    credit_type: str | None = Field(None, alias='creditType')
+    heading: str | Any = Field(default=None, union_mode='left_to_right')
+    credits: list[Credit] | Any = Field(default=None, union_mode='left_to_right')
+    credit_type: str | Any = Field(None, alias='creditType', union_mode='left_to_right')
 
 class CastAndCrew(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    closing_credits: list[ClosingCredit] | None = Field(None, alias='closingCredits')
-    title: str | None = None
+    closing_credits: list[ClosingCredit] | Any = Field(None, alias='closingCredits', union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class ImageMap1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    detail_poster: DetailPoster | None = Field(None, alias='detailPoster')
+    detail_poster: DetailPoster | Any = Field(None, alias='detailPoster', union_mode='left_to_right')
 
 class Meta1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Credit1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image_map: ImageMap1 | None = Field(None, alias='imageMap')
-    role: str | None = None
-    meta: Meta1 | None = None
-    name: str | None = None
-    person_id: UUID | None = Field(None, alias='personId')
-    birth_date: date | None = Field(None, alias='birthDate')
+    image_map: ImageMap1 | Any = Field(None, alias='imageMap', union_mode='left_to_right')
+    role: str | Any = Field(default=None, union_mode='left_to_right')
+    meta: Meta1 | Any = Field(default=None, union_mode='left_to_right')
+    name: str | Any = Field(default=None, union_mode='left_to_right')
+    person_id: UUID | Any = Field(None, alias='personId', union_mode='left_to_right')
+    birth_date: date | Any = Field(None, alias='birthDate', union_mode='left_to_right')
 
 class Meta2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
-    sid: UUID | None = None
-    wid: UUID | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    sid: UUID | Any = Field(default=None, union_mode='left_to_right')
+    wid: UUID | Any = Field(default=None, union_mode='left_to_right')
 
 class DrmAuthentication1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    drm_content_provider: str | None = Field(None, alias='drmContentProvider')
-    data: Data | None = None
+    drm_content_provider: str | Any = Field(None, alias='drmContentProvider', union_mode='left_to_right')
+    data: Data | Any = Field(default=None, union_mode='left_to_right')
 
 class Video1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    video_type: str | None = Field(None, alias='videoType')
-    drm_authentication: DrmAuthentication1 | None = Field(None, alias='drmAuthentication')
-    url: str | None = None
-    quality: str | None = None
+    video_type: str | Any = Field(None, alias='videoType', union_mode='left_to_right')
+    drm_authentication: DrmAuthentication1 | Any = Field(None, alias='drmAuthentication', union_mode='left_to_right')
+    url: str | Any = Field(default=None, union_mode='left_to_right')
+    quality: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Media1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    audio_tracks: list[AudioTrack] | None = Field(None, alias='audioTracks')
-    duration: int | None = None
-    ad_breaks: list[time] | None = Field(None, alias='adBreaks')
-    original_audio_language: str | None = Field(None, alias='originalAudioLanguage')
-    videos: list[Video1] | None = None
-    trick_play_files: list[TrickPlayFile] | None = Field(None, alias='trickPlayFiles')
-    captions: list[Caption] | None = None
+    audio_tracks: list[AudioTrack] | Any = Field(None, alias='audioTracks', union_mode='left_to_right')
+    duration: int | Any = Field(default=None, union_mode='left_to_right')
+    ad_breaks: list[time] | Any = Field(None, alias='adBreaks', union_mode='left_to_right')
+    original_audio_language: str | Any = Field(None, alias='originalAudioLanguage', union_mode='left_to_right')
+    videos: list[Video1] | Any = Field(default=None, union_mode='left_to_right')
+    trick_play_files: list[TrickPlayFile] | Any = Field(None, alias='trickPlayFiles', union_mode='left_to_right')
+    captions: list[Caption] | Any = Field(default=None, union_mode='left_to_right')
 
 class PlaybackDetails(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    url: str | None = None
-    auto_play_next_url: str | None = Field(None, alias='autoPlayNextURL')
+    url: str | Any = Field(default=None, union_mode='left_to_right')
+    auto_play_next_url: str | Any = Field(None, alias='autoPlayNextURL', union_mode='left_to_right')
 
 class Meta3(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    has_view_options: bool | None = Field(None, alias='hasViewOptions')
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: str | None = None
-    source: str | None = None
-    href: str | None = None
+    has_view_options: bool | Any = Field(None, alias='hasViewOptions', union_mode='left_to_right')
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class ProviderDetails1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta3 | None = None
+    meta: Meta3 | Any = Field(default=None, union_mode='left_to_right')
 
 class CreditCuePoint(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    start: int | None = None
-    end: int | None = None
-    skippable: bool | None = None
-    type: str | None = None
-    credit_type: str | None = Field(None, alias='creditType')
+    start: int | Any = Field(default=None, union_mode='left_to_right')
+    end: int | Any = Field(default=None, union_mode='left_to_right')
+    skippable: bool | Any = Field(default=None, union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    credit_type: str | Any = Field(None, alias='creditType', union_mode='left_to_right')
 
 class ViewOption1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    business_model: str | None = Field(None, alias='businessModel')
-    is_unlocked: bool | None = Field(None, alias='isUnlocked')
-    has_media: bool | None = Field(None, alias='hasMedia')
-    media: Media1 | None = None
-    date_added: AwareDatetime | None = Field(None, alias='dateAdded')
-    provider_type: str | None = Field(None, alias='providerType')
-    play_id: str | None = Field(None, alias='playId')
-    playback_details: PlaybackDetails | None = Field(None, alias='playbackDetails')
-    price: int | None = None
-    provider_id: str | None = Field(None, alias='providerId')
-    provider_details: ProviderDetails1 | None = Field(None, alias='providerDetails')
-    currency: str | None = None
-    provider_name: str | None = Field(None, alias='providerName')
-    initial_available_time: AwareDatetime | None = Field(None, alias='initialAvailableTime')
-    price_display: str | None = Field(None, alias='priceDisplay')
-    staging_end_time: str | None = Field(None, alias='stagingEndTime')
-    in4k: bool | None = None
-    ads_provider_id: str | None = Field(None, alias='adsProviderId')
-    tags: list[str] | None = None
-    in_hd: bool | None = Field(None, alias='inHd')
-    license: str | None = None
-    is_dummy_play_id: bool | None = Field(None, alias='isDummyPlayId')
-    credit_cue_points: list[CreditCuePoint] | None = Field(None, alias='creditCuePoints')
-    staging_start_time: str | None = Field(None, alias='stagingStartTime')
+    business_model: str | Any = Field(None, alias='businessModel', union_mode='left_to_right')
+    is_unlocked: bool | Any = Field(None, alias='isUnlocked', union_mode='left_to_right')
+    has_media: bool | Any = Field(None, alias='hasMedia', union_mode='left_to_right')
+    media: Media1 | Any = Field(default=None, union_mode='left_to_right')
+    date_added: AwareDatetime | Any = Field(None, alias='dateAdded', union_mode='left_to_right')
+    provider_type: str | Any = Field(None, alias='providerType', union_mode='left_to_right')
+    play_id: str | Any = Field(None, alias='playId', union_mode='left_to_right')
+    playback_details: PlaybackDetails | Any = Field(None, alias='playbackDetails', union_mode='left_to_right')
+    price: int | Any = Field(default=None, union_mode='left_to_right')
+    provider_id: str | Any = Field(None, alias='providerId', union_mode='left_to_right')
+    provider_details: ProviderDetails1 | Any = Field(None, alias='providerDetails', union_mode='left_to_right')
+    currency: str | Any = Field(default=None, union_mode='left_to_right')
+    provider_name: str | Any = Field(None, alias='providerName', union_mode='left_to_right')
+    initial_available_time: AwareDatetime | Any = Field(None, alias='initialAvailableTime', union_mode='left_to_right')
+    price_display: str | Any = Field(None, alias='priceDisplay', union_mode='left_to_right')
+    staging_end_time: str | Any = Field(None, alias='stagingEndTime', union_mode='left_to_right')
+    in4k: bool | Any = Field(default=None, union_mode='left_to_right')
+    ads_provider_id: str | Any = Field(None, alias='adsProviderId', union_mode='left_to_right')
+    tags: list[str] | Any = Field(default=None, union_mode='left_to_right')
+    in_hd: bool | Any = Field(None, alias='inHd', union_mode='left_to_right')
+    license: str | Any = Field(default=None, union_mode='left_to_right')
+    is_dummy_play_id: bool | Any = Field(None, alias='isDummyPlayId', union_mode='left_to_right')
+    credit_cue_points: list[CreditCuePoint] | Any = Field(None, alias='creditCuePoints', union_mode='left_to_right')
+    staging_start_time: str | Any = Field(None, alias='stagingStartTime', union_mode='left_to_right')
 
 class Episode(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta2 | None = None
-    season_number: str | None = Field(None, alias='seasonNumber')
-    episode_number: str | None = Field(None, alias='episodeNumber')
-    view_options: list[ViewOption1] | None = Field(None, alias='viewOptions')
+    meta: Meta2 | Any = Field(default=None, union_mode='left_to_right')
+    season_number: str | Any = Field(None, alias='seasonNumber', union_mode='left_to_right')
+    episode_number: str | Any = Field(None, alias='episodeNumber', union_mode='left_to_right')
+    view_options: list[ViewOption1] | Any = Field(None, alias='viewOptions', union_mode='left_to_right')
 
 class Zone(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta3 | None = None
+    meta: Meta3 | Any = Field(default=None, union_mode='left_to_right')
 
 class Image1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    is_primary: bool | None = Field(None, alias='isPrimary')
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
-    type: str | None = None
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    is_primary: bool | Any = Field(None, alias='isPrimary', union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta5(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    has_view_options: bool | None = Field(None, alias='hasViewOptions')
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: str | None = None
-    source: str | None = None
-    href: str | None = None
-    cid: str | None = None
+    has_view_options: bool | Any = Field(None, alias='hasViewOptions', union_mode='left_to_right')
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    cid: str | Any = Field(default=None, union_mode='left_to_right')
 
 class CategoryObject(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    kids_appropriate: bool | None = Field(None, alias='kidsAppropriate')
-    is_available: bool | None = Field(None, alias='isAvailable')
-    index_source: str | None = Field(None, alias='indexSource')
-    is_featured_row_eligible: bool | None = Field(None, alias='isFeaturedRowEligible')
-    language: str | None = None
-    browsable: bool | None = None
-    requires_user_info: bool | None = Field(None, alias='requiresUserInfo')
-    type: str | None = None
-    title: str | None = None
-    descriptions: dict[str, Any] | None = None
-    view_options: list[Any] | None = Field(None, alias='viewOptions')
-    enabled: bool | None = None
-    mvpd_livefeeds: list[Any] | None = Field(None, alias='mvpdLivefeeds')
-    recent_season_first: bool | None = Field(None, alias='recentSeasonFirst')
-    zone: Zone | None = None
-    kids_directed: bool | None = Field(None, alias='kidsDirected')
-    genres: list[Any] | None = None
-    extra: str | None = None
-    zone_id: str | None = Field(None, alias='zoneId')
-    channel_store_code: str | None = Field(None, alias='channelStoreCode')
-    release_year: int | None = Field(None, alias='releaseYear')
-    savable: bool | None = None
-    content_rating_class: int | None = Field(None, alias='contentRatingClass')
-    images: list[Image1] | None = None
-    editorially_generated: bool | None = Field(None, alias='editoriallyGenerated')
-    release_date: AwareDatetime | None = Field(None, alias='releaseDate')
-    start_year: str | None = Field(None, alias='startYear')
-    searchable: bool | None = None
-    reverse_chronological: bool | None = Field(None, alias='reverseChronological')
-    meta: Meta5 | None = None
-    genre_appropriate: bool | None = Field(None, alias='genreAppropriate')
-    sub_type: str | None = Field(None, alias='subType')
+    kids_appropriate: bool | Any = Field(None, alias='kidsAppropriate', union_mode='left_to_right')
+    is_available: bool | Any = Field(None, alias='isAvailable', union_mode='left_to_right')
+    index_source: str | Any = Field(None, alias='indexSource', union_mode='left_to_right')
+    is_featured_row_eligible: bool | Any = Field(None, alias='isFeaturedRowEligible', union_mode='left_to_right')
+    language: str | Any = Field(default=None, union_mode='left_to_right')
+    browsable: bool | Any = Field(default=None, union_mode='left_to_right')
+    requires_user_info: bool | Any = Field(None, alias='requiresUserInfo', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    descriptions: dict[str, Any] | Any = Field(default=None, union_mode='left_to_right')
+    view_options: list[Any] | Any = Field(None, alias='viewOptions', union_mode='left_to_right')
+    enabled: bool | Any = Field(default=None, union_mode='left_to_right')
+    mvpd_livefeeds: list[Any] | Any = Field(None, alias='mvpdLivefeeds', union_mode='left_to_right')
+    recent_season_first: bool | Any = Field(None, alias='recentSeasonFirst', union_mode='left_to_right')
+    zone: Zone | Any = Field(default=None, union_mode='left_to_right')
+    kids_directed: bool | Any = Field(None, alias='kidsDirected', union_mode='left_to_right')
+    genres: list[Any] | Any = Field(default=None, union_mode='left_to_right')
+    extra: str | Any = Field(default=None, union_mode='left_to_right')
+    zone_id: str | Any = Field(None, alias='zoneId', union_mode='left_to_right')
+    channel_store_code: str | Any = Field(None, alias='channelStoreCode', union_mode='left_to_right')
+    release_year: int | Any = Field(None, alias='releaseYear', union_mode='left_to_right')
+    savable: bool | Any = Field(default=None, union_mode='left_to_right')
+    content_rating_class: int | Any = Field(None, alias='contentRatingClass', union_mode='left_to_right')
+    images: list[Image1] | Any = Field(default=None, union_mode='left_to_right')
+    editorially_generated: bool | Any = Field(None, alias='editoriallyGenerated', union_mode='left_to_right')
+    release_date: AwareDatetime | Any = Field(None, alias='releaseDate', union_mode='left_to_right')
+    start_year: str | Any = Field(None, alias='startYear', union_mode='left_to_right')
+    searchable: bool | Any = Field(default=None, union_mode='left_to_right')
+    reverse_chronological: bool | Any = Field(None, alias='reverseChronological', union_mode='left_to_right')
+    meta: Meta5 | Any = Field(default=None, union_mode='left_to_right')
+    genre_appropriate: bool | Any = Field(None, alias='genreAppropriate', union_mode='left_to_right')
+    sub_type: str | Any = Field(None, alias='subType', union_mode='left_to_right')
 
 class ParentalRating(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    code: str | None = None
-    rating_source: str | None = Field(None, alias='ratingSource')
-    rating_level: int | None = Field(None, alias='ratingLevel')
+    code: str | Any = Field(default=None, union_mode='left_to_right')
+    rating_source: str | Any = Field(None, alias='ratingSource', union_mode='left_to_right')
+    rating_level: int | Any = Field(None, alias='ratingLevel', union_mode='left_to_right')
 
 class Image2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class ProviderBadge(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image: Image2 | None = None
-    title: str | None = None
+    image: Image2 | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Image3(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
+    path: str | Any = Field(default=None, union_mode='left_to_right')
 
 class BottomLeftItem(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    badge_color: list[str] | None = Field(None, alias='badgeColor')
-    image: Image3 | None = None
-    badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: datetime = Field(None, alias='validityEndTime')
-    validity_start_time: datetime = Field(None, alias='validityStartTime')
-    id: UUID | None = None
-    text: str | None = None
-    audioguide: str | None = None
-    text_color: str | None = Field(None, alias='textColor')
+    badge_color: list[str] | Any = Field(None, alias='badgeColor', union_mode='left_to_right')
+    image: Image3 | Any = Field(default=None, union_mode='left_to_right')
+    badge_type: str | Any = Field(None, alias='badgeType', union_mode='left_to_right')
+    validity_end_time: datetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: datetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    audioguide: str | Any = Field(default=None, union_mode='left_to_right')
+    text_color: str | Any = Field(None, alias='textColor', union_mode='left_to_right')
 
 class Grid(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    bottom_left: list[BottomLeftItem] | None = Field(None, alias='bottom-left')
+    bottom_left: list[BottomLeftItem] | Any = Field(None, alias='bottom-left', union_mode='left_to_right')
 
 class BottomLeftItem1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    badge_color: list[str] | None = Field(None, alias='badgeColor')
-    image: Image3 | None = None
-    badge_type: str | None = Field(None, alias='badgeType')
-    validity_end_time: datetime = Field(None, alias='validityEndTime')
-    validity_start_time: datetime = Field(None, alias='validityStartTime')
-    id: UUID | None = None
-    text: str | None = None
-    audioguide: str | None = None
-    text_color: str | None = Field(None, alias='textColor')
+    badge_color: list[str] | Any = Field(None, alias='badgeColor', union_mode='left_to_right')
+    image: Image3 | Any = Field(default=None, union_mode='left_to_right')
+    badge_type: str | Any = Field(None, alias='badgeType', union_mode='left_to_right')
+    validity_end_time: datetime | Any = Field(None, alias='validityEndTime', union_mode='left_to_right')
+    validity_start_time: datetime | Any = Field(None, alias='validityStartTime', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    text: str | Any = Field(default=None, union_mode='left_to_right')
+    audioguide: str | Any = Field(default=None, union_mode='left_to_right')
+    text_color: str | Any = Field(None, alias='textColor', union_mode='left_to_right')
 
 class DetailScreen(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    bottom_left: list[BottomLeftItem1] | None = Field(None, alias='bottom-left')
+    bottom_left: list[BottomLeftItem1] | Any = Field(None, alias='bottom-left', union_mode='left_to_right')
 
 class Indicators(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    provider_badge: ProviderBadge | None = Field(None, alias='providerBadge')
-    grid: Grid | None = None
-    detail_screen: DetailScreen | None = Field(None, alias='detailScreen')
+    provider_badge: ProviderBadge | Any = Field(None, alias='providerBadge', union_mode='left_to_right')
+    grid: Grid | Any = Field(default=None, union_mode='left_to_right')
+    detail_screen: DetailScreen | Any = Field(None, alias='detailScreen', union_mode='left_to_right')
 
 class Meta6(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
-    sid: UUID | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    sid: UUID | Any = Field(default=None, union_mode='left_to_right')
 
 class Series(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta6 | None = None
-    title: str | None = None
+    meta: Meta6 | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta7(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | str | None = Field(default=None, union_mode='left_to_right')
-    source: str | None = None
-    href: str | None = None
-    sid: UUID | str | None = Field(default=None, union_mode='left_to_right')
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    sid: UUID | str | Any = Field(default=None, union_mode='left_to_right')
 
 class TrackerOverrides(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    item_server_data: str | None = None
+    item_server_data: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta8(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    scope: str | None = None
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
-    sid: UUID | None = None
+    scope: str | Any = Field(default=None, union_mode='left_to_right')
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    sid: UUID | Any = Field(default=None, union_mode='left_to_right')
 
 class Meta9(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    scope: str | None = None
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
+    scope: str | Any = Field(default=None, union_mode='left_to_right')
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Series1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta9 | None = None
-    title: str | None = None
+    meta: Meta9 | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Next(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta8 | None = None
-    series: Series1 | None = None
+    meta: Meta8 | Any = Field(default=None, union_mode='left_to_right')
+    series: Series1 | Any = Field(default=None, union_mode='left_to_right')
 
 class ImageMap2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    detail_background: DetailBackground | None = Field(None, alias='detailBackground')
+    detail_background: DetailBackground | Any = Field(None, alias='detailBackground', union_mode='left_to_right')
 
 class Meta10(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    has_view_options: bool | None = Field(None, alias='hasViewOptions')
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
+    has_view_options: bool | Any = Field(None, alias='hasViewOptions', union_mode='left_to_right')
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Credit2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    role: str | None = None
-    meta: Meta10 | None = None
-    name: str | None = None
-    person_id: UUID | None = Field(None, alias='personId')
-    birth_date: date | None = Field(None, alias='birthDate')
+    role: str | Any = Field(default=None, union_mode='left_to_right')
+    meta: Meta10 | Any = Field(default=None, union_mode='left_to_right')
+    name: str | Any = Field(default=None, union_mode='left_to_right')
+    person_id: UUID | Any = Field(None, alias='personId', union_mode='left_to_right')
+    birth_date: date | Any = Field(None, alias='birthDate', union_mode='left_to_right')
 
 class Meta11(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: str | None = None
-    source: str | None = None
-    href: str | None = None
-    sid: str | None = None
-    has_view_options: bool | None = Field(None, alias='hasViewOptions')
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    sid: str | Any = Field(default=None, union_mode='left_to_right')
+    has_view_options: bool | Any = Field(None, alias='hasViewOptions', union_mode='left_to_right')
 
 class Grid1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class ImageMap3(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    grid: Grid1 | None = None
+    grid: Grid1 | Any = Field(default=None, union_mode='left_to_right')
 
 class Image5(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    tier: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
-    type: str | None = None
-    is_primary: bool | None = Field(None, alias='isPrimary')
-    roku_id: str | None = Field(None, alias='rokuId')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    tier: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    is_primary: bool | Any = Field(None, alias='isPrimary', union_mode='left_to_right')
+    roku_id: str | Any = Field(None, alias='rokuId', union_mode='left_to_right')
 
 class Meta12(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
-    sid: UUID | None = None
-    wid: UUID | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
+    sid: UUID | Any = Field(default=None, union_mode='left_to_right')
+    wid: UUID | Any = Field(default=None, union_mode='left_to_right')
 
 class Image6(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class ProviderBadge1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image: Image6 | None = None
-    title: str | None = None
+    image: Image6 | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Indicators1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    provider_badge: ProviderBadge1 | None = Field(None, alias='providerBadge')
+    provider_badge: ProviderBadge1 | Any = Field(None, alias='providerBadge', union_mode='left_to_right')
 
 class Meta13(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: str | None = None
-    source: str | None = None
-    href: str | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class ProviderDetails2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta13 | None = None
+    meta: Meta13 | Any = Field(default=None, union_mode='left_to_right')
 
 class Media2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    duration: int | None = None
+    duration: int | Any = Field(default=None, union_mode='left_to_right')
 
 class ViewOption2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    provider_id: str | None = Field(None, alias='providerId')
-    provider_details: ProviderDetails2 | None = Field(None, alias='providerDetails')
-    is_unlocked: bool | None = Field(None, alias='isUnlocked')
-    media: Media2 | None = None
+    provider_id: str | Any = Field(None, alias='providerId', union_mode='left_to_right')
+    provider_details: ProviderDetails2 | Any = Field(None, alias='providerDetails', union_mode='left_to_right')
+    is_unlocked: bool | Any = Field(None, alias='isUnlocked', union_mode='left_to_right')
+    media: Media2 | Any = Field(default=None, union_mode='left_to_right')
 
 class Episode1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    current_time: AwareDatetime | None = Field(None, alias='currentTime')
-    image_map: ImageMap3 | None = Field(None, alias='imageMap')
-    images: list[Image5] | None = None
-    release_date: AwareDatetime | None = Field(None, alias='releaseDate')
-    meta: Meta12 | None = None
-    description: str | None = None
-    season_number: str | None = Field(None, alias='seasonNumber')
-    title: str | None = None
-    indicators: Indicators1 | None = None
-    episode_number: str | None = Field(None, alias='episodeNumber')
-    view_options: list[ViewOption2] | None = Field(None, alias='viewOptions')
+    current_time: AwareDatetime | Any = Field(None, alias='currentTime', union_mode='left_to_right')
+    image_map: ImageMap3 | Any = Field(None, alias='imageMap', union_mode='left_to_right')
+    images: list[Image5] | Any = Field(default=None, union_mode='left_to_right')
+    release_date: AwareDatetime | Any = Field(None, alias='releaseDate', union_mode='left_to_right')
+    meta: Meta12 | Any = Field(default=None, union_mode='left_to_right')
+    description: str | Any = Field(default=None, union_mode='left_to_right')
+    season_number: str | Any = Field(None, alias='seasonNumber', union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    indicators: Indicators1 | Any = Field(default=None, union_mode='left_to_right')
+    episode_number: str | Any = Field(None, alias='episodeNumber', union_mode='left_to_right')
+    view_options: list[ViewOption2] | Any = Field(None, alias='viewOptions', union_mode='left_to_right')
 
 class Credit3(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    role: str | None = None
-    name: str | None = None
+    role: str | Any = Field(default=None, union_mode='left_to_right')
+    name: str | Any = Field(default=None, union_mode='left_to_right')
 
 class ClosingCredit1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    heading: str | None = None
-    credits: list[Credit3] | None = None
-    credit_type: str | None = Field(None, alias='creditType')
+    heading: str | Any = Field(default=None, union_mode='left_to_right')
+    credits: list[Credit3] | Any = Field(default=None, union_mode='left_to_right')
+    credit_type: str | Any = Field(None, alias='creditType', union_mode='left_to_right')
 
 class CastAndCrew1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    closing_credits: list[ClosingCredit1] | None = Field(None, alias='closingCredits')
-    title: str | None = None
+    closing_credits: list[ClosingCredit1] | Any = Field(None, alias='closingCredits', union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Season(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image_map: ImageMap2 | None = Field(None, alias='imageMap')
-    credits: list[Credit2] | None = None
-    meta: Meta11 | None = None
-    season_number: str | None = Field(None, alias='seasonNumber')
-    title: str | None = None
-    descriptions: dict[str, Any] | None = None
-    release_year: int | None = Field(None, alias='releaseYear')
-    episodes: list[Episode1] | None = None
-    cast_and_crew: CastAndCrew1 | None = Field(None, alias='castAndCrew')
+    image_map: ImageMap2 | Any = Field(None, alias='imageMap', union_mode='left_to_right')
+    credits: list[Credit2] | Any = Field(default=None, union_mode='left_to_right')
+    meta: Meta11 | Any = Field(default=None, union_mode='left_to_right')
+    season_number: str | Any = Field(None, alias='seasonNumber', union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    descriptions: dict[str, Any] | Any = Field(default=None, union_mode='left_to_right')
+    release_year: int | Any = Field(None, alias='releaseYear', union_mode='left_to_right')
+    episodes: list[Episode1] | Any = Field(default=None, union_mode='left_to_right')
+    cast_and_crew: CastAndCrew1 | Any = Field(None, alias='castAndCrew', union_mode='left_to_right')
 
 class ImageMap4(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    grid: Grid1 | None = None
+    grid: Grid1 | Any = Field(default=None, union_mode='left_to_right')
 
 class Image7(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    tier: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
-    type: str | None = None
-    is_primary: bool | None = Field(None, alias='isPrimary')
-    roku_id: str | None = Field(None, alias='rokuId')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    tier: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    is_primary: bool | Any = Field(None, alias='isPrimary', union_mode='left_to_right')
+    roku_id: str | Any = Field(None, alias='rokuId', union_mode='left_to_right')
 
 class Meta15(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: UUID | None = None
-    source: str | None = None
-    href: str | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Image8(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    path: str | None = None
-    aspect_ratio: str | None = Field(None, alias='aspectRatio')
+    path: str | Any = Field(default=None, union_mode='left_to_right')
+    aspect_ratio: str | Any = Field(None, alias='aspectRatio', union_mode='left_to_right')
 
 class ProviderBadge2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image: Image8 | None = None
-    title: str | None = None
+    image: Image8 | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Indicators2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    provider_badge: ProviderBadge2 | None = Field(None, alias='providerBadge')
+    provider_badge: ProviderBadge2 | Any = Field(None, alias='providerBadge', union_mode='left_to_right')
 
 class Meta16(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    media_type: str | None = Field(None, alias='mediaType')
-    href_v2: str | None = Field(None, alias='hrefV2')
-    id: str | None = None
-    source: str | None = None
-    href: str | None = None
+    media_type: str | Any = Field(None, alias='mediaType', union_mode='left_to_right')
+    href_v2: str | Any = Field(None, alias='hrefV2', union_mode='left_to_right')
+    id: str | Any = Field(default=None, union_mode='left_to_right')
+    source: str | Any = Field(default=None, union_mode='left_to_right')
+    href: str | Any = Field(default=None, union_mode='left_to_right')
 
 class ProviderDetails3(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta16 | None = None
+    meta: Meta16 | Any = Field(default=None, union_mode='left_to_right')
 
 class ViewOption3(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    provider_id: str | None = Field(None, alias='providerId')
-    provider_details: ProviderDetails3 | None = Field(None, alias='providerDetails')
-    is_unlocked: bool | None = Field(None, alias='isUnlocked')
-    media: Media2 | None = None
+    provider_id: str | Any = Field(None, alias='providerId', union_mode='left_to_right')
+    provider_details: ProviderDetails3 | Any = Field(None, alias='providerDetails', union_mode='left_to_right')
+    is_unlocked: bool | Any = Field(None, alias='isUnlocked', union_mode='left_to_right')
+    media: Media2 | Any = Field(default=None, union_mode='left_to_right')
 
 class Episode2(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    current_time: AwareDatetime | None = Field(None, alias='currentTime')
-    image_map: ImageMap4 | None = Field(None, alias='imageMap')
-    images: list[Image7] | None = None
-    release_date: AwareDatetime | None = Field(None, alias='releaseDate')
-    meta: Meta15 | None = None
-    description: str | None = None
-    season_number: str | None = Field(None, alias='seasonNumber')
-    title: str | None = None
-    indicators: Indicators2 | None = None
-    episode_number: str | None = Field(None, alias='episodeNumber')
-    view_options: list[ViewOption3] | None = Field(None, alias='viewOptions')
+    current_time: AwareDatetime | Any = Field(None, alias='currentTime', union_mode='left_to_right')
+    image_map: ImageMap4 | Any = Field(None, alias='imageMap', union_mode='left_to_right')
+    images: list[Image7] | Any = Field(default=None, union_mode='left_to_right')
+    release_date: AwareDatetime | Any = Field(None, alias='releaseDate', union_mode='left_to_right')
+    meta: Meta15 | Any = Field(default=None, union_mode='left_to_right')
+    description: str | Any = Field(default=None, union_mode='left_to_right')
+    season_number: str | Any = Field(None, alias='seasonNumber', union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    indicators: Indicators2 | Any = Field(default=None, union_mode='left_to_right')
+    episode_number: str | Any = Field(None, alias='episodeNumber', union_mode='left_to_right')
+    view_options: list[ViewOption3] | Any = Field(None, alias='viewOptions', union_mode='left_to_right')
 
 class Season1(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    meta: Meta13 | None = None
-    episodes: list[Episode2] | None = None
+    meta: Meta13 | Any = Field(default=None, union_mode='left_to_right')
+    episodes: list[Episode2] | Any = Field(default=None, union_mode='left_to_right')
 
 class ContentModel(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image_map: ImageMap | None = Field(None, alias='imageMap')
-    type: str | None = None
-    title: str | None = None
-    descriptions: Descriptions | None = None
-    view_options: list[ViewOption] | None = Field(None, alias='viewOptions')
-    language_dialog_body: str | None = Field(None, alias='languageDialogBody')
-    cast_and_crew: CastAndCrew | None = Field(None, alias='castAndCrew')
-    credits: list[Credit1] | None = None
-    kids_directed: bool | None = Field(None, alias='kidsDirected')
-    genres: list[str] | None = None
-    release_year: int | None = Field(None, alias='releaseYear')
-    savable: bool | None = None
-    episodes: list[Episode] | None = None
-    category_objects: list[CategoryObject] | None = Field(None, alias='categoryObjects')
-    content_rating_class: int | None = Field(None, alias='contentRatingClass')
-    save_list_last_interaction_time: int | None = Field(None, alias='saveListLastInteractionTime')
-    release_date: AwareDatetime | None = Field(None, alias='releaseDate')
-    admin_include: dict[str, Any] | None = Field(None, alias='adminInclude')
-    parental_ratings: list[ParentalRating] | None = Field(None, alias='parentalRatings')
-    season_number: str | None = Field(None, alias='seasonNumber')
-    indicators: Indicators | None = None
-    reverse_chronological: bool | None = Field(None, alias='reverseChronological')
-    current_time: AwareDatetime | None = Field(None, alias='currentTime')
-    series: Series | None = None
-    meta: Meta7 | None = None
-    tracker_overrides: TrackerOverrides | None = Field(None, alias='trackerOverrides')
-    trace_id: UUID | None = Field(None, alias='traceId')
-    next: Next | None = None
-    description: str | None = None
-    seasons: list[Season] | None = None
-    run_time_seconds: int | None = Field(None, alias='runTimeSeconds')
-    episode_number: str | None = Field(None, alias='episodeNumber')
-    season: Season1 | None = None
+    image_map: ImageMap | Any = Field(None, alias='imageMap', union_mode='left_to_right')
+    type: str | Any = Field(default=None, union_mode='left_to_right')
+    title: str | Any = Field(default=None, union_mode='left_to_right')
+    descriptions: Descriptions | Any = Field(default=None, union_mode='left_to_right')
+    view_options: list[ViewOption] | Any = Field(None, alias='viewOptions', union_mode='left_to_right')
+    language_dialog_body: str | Any = Field(None, alias='languageDialogBody', union_mode='left_to_right')
+    cast_and_crew: CastAndCrew | Any = Field(None, alias='castAndCrew', union_mode='left_to_right')
+    credits: list[Credit1] | Any = Field(default=None, union_mode='left_to_right')
+    kids_directed: bool | Any = Field(None, alias='kidsDirected', union_mode='left_to_right')
+    genres: list[str] | Any = Field(default=None, union_mode='left_to_right')
+    release_year: int | Any = Field(None, alias='releaseYear', union_mode='left_to_right')
+    savable: bool | Any = Field(default=None, union_mode='left_to_right')
+    episodes: list[Episode] | Any = Field(default=None, union_mode='left_to_right')
+    category_objects: list[CategoryObject] | Any = Field(None, alias='categoryObjects', union_mode='left_to_right')
+    content_rating_class: int | Any = Field(None, alias='contentRatingClass', union_mode='left_to_right')
+    save_list_last_interaction_time: int | Any = Field(None, alias='saveListLastInteractionTime', union_mode='left_to_right')
+    release_date: AwareDatetime | Any = Field(None, alias='releaseDate', union_mode='left_to_right')
+    admin_include: dict[str, Any] | Any = Field(None, alias='adminInclude', union_mode='left_to_right')
+    parental_ratings: list[ParentalRating] | Any = Field(None, alias='parentalRatings', union_mode='left_to_right')
+    season_number: str | Any = Field(None, alias='seasonNumber', union_mode='left_to_right')
+    indicators: Indicators | Any = Field(default=None, union_mode='left_to_right')
+    reverse_chronological: bool | Any = Field(None, alias='reverseChronological', union_mode='left_to_right')
+    current_time: AwareDatetime | Any = Field(None, alias='currentTime', union_mode='left_to_right')
+    series: Series | Any = Field(default=None, union_mode='left_to_right')
+    meta: Meta7 | Any = Field(default=None, union_mode='left_to_right')
+    tracker_overrides: TrackerOverrides | Any = Field(None, alias='trackerOverrides', union_mode='left_to_right')
+    trace_id: UUID | Any = Field(None, alias='traceId', union_mode='left_to_right')
+    next: Next | Any = Field(default=None, union_mode='left_to_right')
+    description: str | Any = Field(default=None, union_mode='left_to_right')
+    seasons: list[Season] | Any = Field(default=None, union_mode='left_to_right')
+    run_time_seconds: int | Any = Field(None, alias='runTimeSeconds', union_mode='left_to_right')
+    episode_number: str | Any = Field(None, alias='episodeNumber', union_mode='left_to_right')
+    season: Season1 | Any = Field(default=None, union_mode='left_to_right')
     _raw_input: Any = PrivateAttr(default=None)
 
     @model_validator(mode='wrap')

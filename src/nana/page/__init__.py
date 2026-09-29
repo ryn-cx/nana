@@ -24,7 +24,7 @@ as a server error rather than a 404."""
 
 # TODO: Validate
 class Page(BaseEndpoint):
-    """Manage the page file.
+    """Contains the page.
 
     A page is a browse screen, it holds the collections ("Recently Added",
     "Popular", ...) that the screen is built out of. Page ids come from
@@ -56,7 +56,7 @@ class Page(BaseEndpoint):
 
     # TODO: Validate
     def __call__(self, page_id: str) -> PageModel:
-        """Look the page up and return the model it is read into."""
+        """Download and parse the page file."""
         log_id = self.get_log_id(self.__call__, locals())
         return self.load(self.download(page_id), log_id)
 
@@ -78,7 +78,7 @@ class Page(BaseEndpoint):
 
     # TODO: Validate
     def load(self, data: str, log_id: str = "") -> PageModel:
-        """Read a downloaded page file into its model."""
+        """Load a page file into its model."""
         return model_validate_json(data, log_id or self.default_log_id)
 
     # TODO: Validate

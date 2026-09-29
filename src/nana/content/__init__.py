@@ -17,7 +17,7 @@ logger.addHandler(NullHandler())
 
 # TODO: Validate
 class Content(BaseEndpoint):
-    """Manage the content file.
+    """Contains the content.
 
     One endpoint covers every kind of content, the `type` field says which one
     was returned. A series includes its seasons and their episodes, so a series,
@@ -91,7 +91,7 @@ class Content(BaseEndpoint):
         filters: str = FILTER,
         feature_include: str = FEATURE_INCLUDE,
     ) -> ContentModel:
-        """Look the content up and return the model it is read into."""
+        """Download and parse the content file."""
         log_id = self.get_log_id(self.__call__, locals())
         return self.load(
             self.download(
@@ -138,5 +138,5 @@ class Content(BaseEndpoint):
 
     # TODO: Validate
     def load(self, data: str, log_id: str = "") -> ContentModel:
-        """Read a downloaded content file into its model."""
+        """Load a content file into its model."""
         return model_validate_json(data, log_id or self.default_log_id)

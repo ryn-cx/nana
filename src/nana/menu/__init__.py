@@ -21,7 +21,7 @@ PAGE_TYPE = "page"
 
 # TODO: Validate
 class Menu(BaseEndpoint):
-    """Manage the menu file.
+    """Contains the menu.
 
     The menu is the site navigation, it is the only place the ids of the browse
     pages are published.
@@ -52,7 +52,7 @@ class Menu(BaseEndpoint):
 
     # TODO: Validate
     def __call__(self) -> MenuModel:
-        """Look the menu up and return the model it is read into."""
+        """Download and parse the menu file."""
         log_id = self.get_log_id(self.__call__, locals())
         return self.load(self.download(), log_id)
 
@@ -68,7 +68,7 @@ class Menu(BaseEndpoint):
 
     # TODO: Validate
     def load(self, data: str, log_id: str = "") -> MenuModel:
-        """Read a downloaded menu file into its model."""
+        """Load a menu file into its model."""
         return model_validate_json(data, log_id or self.default_log_id)
 
     # TODO: Validate
